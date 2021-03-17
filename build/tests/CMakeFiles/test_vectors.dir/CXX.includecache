@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../tests/../include/vector_seq.h
+
+/home/nuss/75/bt717775/PNLA_Template/tests/test_vectors.cpp
+iostream
+-
+limits
+-
+vector_seq.h
+-
+
