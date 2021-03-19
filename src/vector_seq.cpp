@@ -33,7 +33,6 @@ namespace pnla{
         {
             init_vector[elem_index] = elem_index;
         }
-        
     }
 
     //

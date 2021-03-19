@@ -50,7 +50,6 @@ namespace pnla{
             {
              return x;
             }
-            
 
 
             //
