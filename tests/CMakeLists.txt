@@ -2,7 +2,7 @@
 # Tests need to be added as executables first
 add_executable(test_vectors test_vectors.cpp)
 
-# Tells where headers of target are to be found
+# Tells where headers of target are to be foundclea
 target_include_directories(test_vectors PUBLIC ../include)
 
 # Links test_vectors against library pnla

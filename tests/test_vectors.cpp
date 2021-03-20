@@ -43,12 +43,12 @@ int test_vector_routines(const int dimension, const double epsilon)
  */
 int main(int argc, char *argv[])
 {
-    int dim = 10;
+    int dim = 20;
 
- 	if(argc == 2)
-	{
-        dim = std::stoi(argv[1]);
-	}
+ 	// if(argc == 2)
+	// {
+    //     dim = std::stoi(argv[1]);
+	// }
 
     const double epsilon(std::numeric_limits<double>::epsilon()); 
     int test_result = 0; 
@@ -56,10 +56,10 @@ int main(int argc, char *argv[])
     std::cout<<"Test Sequential Vector"<<std::endl;
 
     /// call of test_vector should look something like this
-    // test_result = test_vector_routines<pnla::your_vector>(dim, epsilon);
+    test_result = test_vector_routines<pnla::Vector_n_dim>(dim, epsilon);
 
     // Just for illustration of template function and to surpress warnings
-    test_result = test_vector_routines<double>(dim, epsilon);
+    //test_result = test_vector_routines<double>(dim, epsilon);
 
     if(test_result !=0 )
         return test_result;
