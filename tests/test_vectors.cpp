@@ -9,6 +9,7 @@
  * 
  */
 #include <iostream>
+#include <string>
 #include <limits> //epsilon()
 #include <vector_seq.h>
 
@@ -28,6 +29,7 @@ int test_vector_routines(const int dimension, const double epsilon)
 {   
     int test_sucess = 0;
 
+
     /// Here you have to implement testing routines for pnla's vector 
     /// structures/classes. If your test fails, set test success to a non zero value;
 
@@ -45,10 +47,12 @@ int main(int argc, char *argv[])
 {
     int dim = 20;
 
- 	// if(argc == 2)
-	// {
-    //     dim = std::stoi(argv[1]);
-	// }
+ 	if(argc == 2)
+	{
+         dim = std::stoi(argv[1]);
+	}
+
+    std::cout << dim;
 
     const double epsilon(std::numeric_limits<double>::epsilon()); 
     int test_result = 0; 

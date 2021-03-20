@@ -24,7 +24,6 @@
  * @param array Array holding some data to be printed
  * @param array_lenght length of array.
  * @param name Name of array to be printed on console
- * 
  * Since definition of fuction template is in cpp file, 
  */
 template<typename array_type>
