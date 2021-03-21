@@ -7,9 +7,23 @@
 #IncludeRegexTransform: 
 
 ../tests/../include/vector_seq.h
-
-/home/nuss/75/bt717775/PNLA_Template/tests/test_vectors.cpp
 iostream
+-
+vector
+-
+string
+-
+
+/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
+vector_seq.h
+-
+cmath
+-
+
+/home/nuss/75/bt717775/PNLA_Shreyas/tests/test_vectors.cpp
+iostream
+-
+string
 -
 limits
 -

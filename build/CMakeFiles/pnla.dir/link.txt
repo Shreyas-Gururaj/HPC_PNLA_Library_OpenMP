@@ -1,2 +1,2 @@
-/usr/bin/ar qc libpnla.a  CMakeFiles/pnla.dir/src/vector_seq.cpp.o
+/usr/bin/ar qc libpnla.a  CMakeFiles/pnla.dir/src/CRS_Matrix.cpp.o CMakeFiles/pnla.dir/src/vector_seq.cpp.o
 /usr/bin/ranlib libpnla.a

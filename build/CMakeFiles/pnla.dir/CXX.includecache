@@ -7,8 +7,18 @@
 #IncludeRegexTransform: 
 
 ../include/vector_seq.h
+iostream
+-
+vector
+-
+string
+-
 
-/home/nuss/75/bt717775/PNLA_Template/src/vector_seq.cpp
+/home/nuss/75/bt717775/PNLA_Shreyas/src/CRS_Matrix.cpp
+
+/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
 vector_seq.h
+-
+cmath
 -
 

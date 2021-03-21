@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nuss/75/bt717775/PNLA_Template
+CMAKE_SOURCE_DIR = /home/nuss/75/bt717775/PNLA_Shreyas
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nuss/75/bt717775/PNLA_Template/build
+CMAKE_BINARY_DIR = /home/nuss/75/bt717775/PNLA_Shreyas/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles /home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles /home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -149,6 +149,33 @@ test_vectors/fast:
 	$(MAKE) -f tests/CMakeFiles/test_vectors.dir/build.make tests/CMakeFiles/test_vectors.dir/build
 .PHONY : test_vectors/fast
 
+src/CRS_Matrix.o: src/CRS_Matrix.cpp.o
+
+.PHONY : src/CRS_Matrix.o
+
+# target to build an object file
+src/CRS_Matrix.cpp.o:
+	$(MAKE) -f CMakeFiles/pnla.dir/build.make CMakeFiles/pnla.dir/src/CRS_Matrix.cpp.o
+.PHONY : src/CRS_Matrix.cpp.o
+
+src/CRS_Matrix.i: src/CRS_Matrix.cpp.i
+
+.PHONY : src/CRS_Matrix.i
+
+# target to preprocess a source file
+src/CRS_Matrix.cpp.i:
+	$(MAKE) -f CMakeFiles/pnla.dir/build.make CMakeFiles/pnla.dir/src/CRS_Matrix.cpp.i
+.PHONY : src/CRS_Matrix.cpp.i
+
+src/CRS_Matrix.s: src/CRS_Matrix.cpp.s
+
+.PHONY : src/CRS_Matrix.s
+
+# target to generate assembly for a file
+src/CRS_Matrix.cpp.s:
+	$(MAKE) -f CMakeFiles/pnla.dir/build.make CMakeFiles/pnla.dir/src/CRS_Matrix.cpp.s
+.PHONY : src/CRS_Matrix.cpp.s
+
 src/vector_seq.o: src/vector_seq.cpp.o
 
 .PHONY : src/vector_seq.o
@@ -187,6 +214,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... dev"
 	@echo "... test_vectors"
+	@echo "... src/CRS_Matrix.o"
+	@echo "... src/CRS_Matrix.i"
+	@echo "... src/CRS_Matrix.s"
 	@echo "... src/vector_seq.o"
 	@echo "... src/vector_seq.i"
 	@echo "... src/vector_seq.s"

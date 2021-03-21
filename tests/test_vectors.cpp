@@ -29,7 +29,6 @@ int test_vector_routines(const int dimension, const double epsilon)
 {   
     int test_sucess = 0;
 
-
     /// Here you have to implement testing routines for pnla's vector 
     /// structures/classes. If your test fails, set test success to a non zero value;
 

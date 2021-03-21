@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++11 -Wall   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/nuss/75/bt717775/PNLA_Template/tests/../include -I/home/nuss/75/bt717775/PNLA_Template/include 
+CXX_INCLUDES = -I/home/nuss/75/bt717775/PNLA_Shreyas/tests/../include -I/home/nuss/75/bt717775/PNLA_Shreyas/include 
 

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nuss/75/bt717775/PNLA_Template
+CMAKE_SOURCE_DIR = /home/nuss/75/bt717775/PNLA_Shreyas
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nuss/75/bt717775/PNLA_Template/build
+CMAKE_BINARY_DIR = /home/nuss/75/bt717775/PNLA_Shreyas/build
 
 # Include any dependencies generated for this target.
 include example/CMakeFiles/dev.dir/depend.make
@@ -59,16 +59,16 @@ include example/CMakeFiles/dev.dir/flags.make
 
 example/CMakeFiles/dev.dir/develop.cpp.o: example/CMakeFiles/dev.dir/flags.make
 example/CMakeFiles/dev.dir/develop.cpp.o: ../example/develop.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object example/CMakeFiles/dev.dir/develop.cpp.o"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dev.dir/develop.cpp.o -c /home/nuss/75/bt717775/PNLA_Template/example/develop.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object example/CMakeFiles/dev.dir/develop.cpp.o"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dev.dir/develop.cpp.o -c /home/nuss/75/bt717775/PNLA_Shreyas/example/develop.cpp
 
 example/CMakeFiles/dev.dir/develop.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dev.dir/develop.cpp.i"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuss/75/bt717775/PNLA_Template/example/develop.cpp > CMakeFiles/dev.dir/develop.cpp.i
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuss/75/bt717775/PNLA_Shreyas/example/develop.cpp > CMakeFiles/dev.dir/develop.cpp.i
 
 example/CMakeFiles/dev.dir/develop.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dev.dir/develop.cpp.s"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuss/75/bt717775/PNLA_Template/example/develop.cpp -o CMakeFiles/dev.dir/develop.cpp.s
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuss/75/bt717775/PNLA_Shreyas/example/develop.cpp -o CMakeFiles/dev.dir/develop.cpp.s
 
 example/CMakeFiles/dev.dir/develop.cpp.o.requires:
 
@@ -83,16 +83,16 @@ example/CMakeFiles/dev.dir/develop.cpp.o.provides.build: example/CMakeFiles/dev.
 
 example/CMakeFiles/dev.dir/my_utilities.cpp.o: example/CMakeFiles/dev.dir/flags.make
 example/CMakeFiles/dev.dir/my_utilities.cpp.o: ../example/my_utilities.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object example/CMakeFiles/dev.dir/my_utilities.cpp.o"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dev.dir/my_utilities.cpp.o -c /home/nuss/75/bt717775/PNLA_Template/example/my_utilities.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object example/CMakeFiles/dev.dir/my_utilities.cpp.o"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dev.dir/my_utilities.cpp.o -c /home/nuss/75/bt717775/PNLA_Shreyas/example/my_utilities.cpp
 
 example/CMakeFiles/dev.dir/my_utilities.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dev.dir/my_utilities.cpp.i"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuss/75/bt717775/PNLA_Template/example/my_utilities.cpp > CMakeFiles/dev.dir/my_utilities.cpp.i
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuss/75/bt717775/PNLA_Shreyas/example/my_utilities.cpp > CMakeFiles/dev.dir/my_utilities.cpp.i
 
 example/CMakeFiles/dev.dir/my_utilities.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dev.dir/my_utilities.cpp.s"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuss/75/bt717775/PNLA_Template/example/my_utilities.cpp -o CMakeFiles/dev.dir/my_utilities.cpp.s
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuss/75/bt717775/PNLA_Shreyas/example/my_utilities.cpp -o CMakeFiles/dev.dir/my_utilities.cpp.s
 
 example/CMakeFiles/dev.dir/my_utilities.cpp.o.requires:
 
@@ -118,8 +118,8 @@ example/dev: example/CMakeFiles/dev.dir/my_utilities.cpp.o
 example/dev: example/CMakeFiles/dev.dir/build.make
 example/dev: libpnla.a
 example/dev: example/CMakeFiles/dev.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable dev"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dev.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable dev"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dev.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 example/CMakeFiles/dev.dir/build: example/dev
@@ -132,10 +132,10 @@ example/CMakeFiles/dev.dir/requires: example/CMakeFiles/dev.dir/my_utilities.cpp
 .PHONY : example/CMakeFiles/dev.dir/requires
 
 example/CMakeFiles/dev.dir/clean:
-	cd /home/nuss/75/bt717775/PNLA_Template/build/example && $(CMAKE_COMMAND) -P CMakeFiles/dev.dir/cmake_clean.cmake
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/example && $(CMAKE_COMMAND) -P CMakeFiles/dev.dir/cmake_clean.cmake
 .PHONY : example/CMakeFiles/dev.dir/clean
 
 example/CMakeFiles/dev.dir/depend:
-	cd /home/nuss/75/bt717775/PNLA_Template/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nuss/75/bt717775/PNLA_Template /home/nuss/75/bt717775/PNLA_Template/example /home/nuss/75/bt717775/PNLA_Template/build /home/nuss/75/bt717775/PNLA_Template/build/example /home/nuss/75/bt717775/PNLA_Template/build/example/CMakeFiles/dev.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nuss/75/bt717775/PNLA_Shreyas /home/nuss/75/bt717775/PNLA_Shreyas/example /home/nuss/75/bt717775/PNLA_Shreyas/build /home/nuss/75/bt717775/PNLA_Shreyas/build/example /home/nuss/75/bt717775/PNLA_Shreyas/build/example/CMakeFiles/dev.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : example/CMakeFiles/dev.dir/depend
 

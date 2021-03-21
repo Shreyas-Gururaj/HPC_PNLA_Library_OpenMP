@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nuss/75/bt717775/PNLA_Template
+CMAKE_SOURCE_DIR = /home/nuss/75/bt717775/PNLA_Shreyas
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nuss/75/bt717775/PNLA_Template/build
+CMAKE_BINARY_DIR = /home/nuss/75/bt717775/PNLA_Shreyas/build
 
 # Include any dependencies generated for this target.
 include tests/CMakeFiles/test_vectors.dir/depend.make
@@ -59,16 +59,16 @@ include tests/CMakeFiles/test_vectors.dir/flags.make
 
 tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o: tests/CMakeFiles/test_vectors.dir/flags.make
 tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o: ../tests/test_vectors.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_vectors.dir/test_vectors.cpp.o -c /home/nuss/75/bt717775/PNLA_Template/tests/test_vectors.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_vectors.dir/test_vectors.cpp.o -c /home/nuss/75/bt717775/PNLA_Shreyas/tests/test_vectors.cpp
 
 tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_vectors.dir/test_vectors.cpp.i"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuss/75/bt717775/PNLA_Template/tests/test_vectors.cpp > CMakeFiles/test_vectors.dir/test_vectors.cpp.i
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuss/75/bt717775/PNLA_Shreyas/tests/test_vectors.cpp > CMakeFiles/test_vectors.dir/test_vectors.cpp.i
 
 tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_vectors.dir/test_vectors.cpp.s"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuss/75/bt717775/PNLA_Template/tests/test_vectors.cpp -o CMakeFiles/test_vectors.dir/test_vectors.cpp.s
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuss/75/bt717775/PNLA_Shreyas/tests/test_vectors.cpp -o CMakeFiles/test_vectors.dir/test_vectors.cpp.s
 
 tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o.requires:
 
@@ -81,19 +81,45 @@ tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o.provides: tests/CMakeFiles/
 tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o.provides.build: tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o
 
 
+tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o: tests/CMakeFiles/test_vectors.dir/flags.make
+tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o: ../src/vector_seq.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o -c /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
+
+tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.i"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp > CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.i
+
+tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.s"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp -o CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.s
+
+tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.requires:
+
+.PHONY : tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.requires
+
+tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.provides: tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.requires
+	$(MAKE) -f tests/CMakeFiles/test_vectors.dir/build.make tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.provides.build
+.PHONY : tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.provides
+
+tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.provides.build: tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o
+
+
 # Object files for target test_vectors
 test_vectors_OBJECTS = \
-"CMakeFiles/test_vectors.dir/test_vectors.cpp.o"
+"CMakeFiles/test_vectors.dir/test_vectors.cpp.o" \
+"CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o"
 
 # External object files for target test_vectors
 test_vectors_EXTERNAL_OBJECTS =
 
 tests/test_vectors: tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o
+tests/test_vectors: tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o
 tests/test_vectors: tests/CMakeFiles/test_vectors.dir/build.make
 tests/test_vectors: libpnla.a
 tests/test_vectors: tests/CMakeFiles/test_vectors.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nuss/75/bt717775/PNLA_Template/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_vectors"
-	cd /home/nuss/75/bt717775/PNLA_Template/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_vectors.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nuss/75/bt717775/PNLA_Shreyas/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test_vectors"
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_vectors.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tests/CMakeFiles/test_vectors.dir/build: tests/test_vectors
@@ -101,14 +127,15 @@ tests/CMakeFiles/test_vectors.dir/build: tests/test_vectors
 .PHONY : tests/CMakeFiles/test_vectors.dir/build
 
 tests/CMakeFiles/test_vectors.dir/requires: tests/CMakeFiles/test_vectors.dir/test_vectors.cpp.o.requires
+tests/CMakeFiles/test_vectors.dir/requires: tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o.requires
 
 .PHONY : tests/CMakeFiles/test_vectors.dir/requires
 
 tests/CMakeFiles/test_vectors.dir/clean:
-	cd /home/nuss/75/bt717775/PNLA_Template/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/test_vectors.dir/cmake_clean.cmake
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/test_vectors.dir/cmake_clean.cmake
 .PHONY : tests/CMakeFiles/test_vectors.dir/clean
 
 tests/CMakeFiles/test_vectors.dir/depend:
-	cd /home/nuss/75/bt717775/PNLA_Template/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nuss/75/bt717775/PNLA_Template /home/nuss/75/bt717775/PNLA_Template/tests /home/nuss/75/bt717775/PNLA_Template/build /home/nuss/75/bt717775/PNLA_Template/build/tests /home/nuss/75/bt717775/PNLA_Template/build/tests/CMakeFiles/test_vectors.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/nuss/75/bt717775/PNLA_Shreyas/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nuss/75/bt717775/PNLA_Shreyas /home/nuss/75/bt717775/PNLA_Shreyas/tests /home/nuss/75/bt717775/PNLA_Shreyas/build /home/nuss/75/bt717775/PNLA_Shreyas/build/tests /home/nuss/75/bt717775/PNLA_Shreyas/build/tests/CMakeFiles/test_vectors.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : tests/CMakeFiles/test_vectors.dir/depend
 

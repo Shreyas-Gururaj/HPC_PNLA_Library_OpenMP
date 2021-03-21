@@ -1,4 +1,4 @@
-# Install script for directory: /home/nuss/75/bt717775/PNLA_Template/example
+# Install script for directory: /home/nuss/75/bt717775/PNLA_Shreyas/example
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
