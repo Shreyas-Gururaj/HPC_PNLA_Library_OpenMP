@@ -22,7 +22,7 @@ namespace pnla{
     void Vector_n_dim::vector_init_constant_elements(std::vector<double> &init_vector, const double constant_value)
 
     {
-        for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
         {
             init_vector[elem_index] = constant_value;
         }
@@ -31,7 +31,7 @@ namespace pnla{
     //
     void Vector_n_dim::vector_init_range_elements(std::vector<double> &init_vector)
     {
-        for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
         {
             init_vector[elem_index] = elem_index;
         }
@@ -41,7 +41,7 @@ namespace pnla{
     void Vector_n_dim::vector_init_std_doubles(std::vector<double> &init_vector)
     {
         std::vector<double> std_vector(init_vector.size());
-        for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
         {
             init_vector[elem_index] = std_vector[elem_index];
         }
@@ -54,7 +54,7 @@ namespace pnla{
     {
         if(init_vector.size() == to_copy_vector.size())
         {
-            for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+            for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
             {
                 to_copy_vector[elem_index] = init_vector[elem_index];
             }
@@ -69,7 +69,7 @@ namespace pnla{
     //
     void Vector_n_dim::vector_scale(std::vector<double> &init_vector, const double scaling_factor)
     {
-        for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
         {
             init_vector[elem_index] = init_vector[elem_index] * scaling_factor;
         }
@@ -82,7 +82,7 @@ namespace pnla{
 
         if(init_vector.size() == vector_for_dot_prod.size())
         {
-            for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+            for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
             {
                 result_dot_prod += init_vector[elem_index] * vector_for_dot_prod[elem_index];
             }
@@ -102,7 +102,7 @@ namespace pnla{
         double squared_sum = 0;
         double result_euclidean_norm;
 
-        for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
         {
             squared_sum += init_vector[elem_index] * init_vector[elem_index];
             result_euclidean_norm = sqrt(squared_sum);
@@ -117,7 +117,7 @@ namespace pnla{
    {
        if(init_vector.size() == to_scale_vector.size())
        {
-           for(int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+           for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
            {
                to_scale_vector[elem_index] = to_scale_vector[elem_index] + scaling_factor_add * init_vector[elem_index];
            }

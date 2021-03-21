@@ -12,6 +12,7 @@
 #include <string>
 #include <limits> //epsilon()
 #include <vector_seq.h>
+#include <cmath>
 
 
 /**
@@ -24,10 +25,49 @@
  * @param epsilon 
  * @return int 
  */
+
+//
+int test_const_elem_vector(int test_sucess_count, const int dimension, const double epsilon)
+    {
+        pnla::Vector_n_dim v1(dimension);
+        std::vector<double> z = v1.get_init_vector();
+        const double const_value = 4.0;
+        
+        v1.vector_init_constant_elements(z, const_value);
+        if(abs(z[2] - const_value) < epsilon)
+        {
+            return test_sucess_count;
+        }
+        else
+        {
+            return test_sucess_count += 1;
+        }
+    }
+
+int test_range_elem_vector(int test_sucess_count, const int dimension, const double epsilon)
+    {
+        pnla::Vector_n_dim v1(dimension);
+        std::vector<double> z = v1.get_init_vector();
+        
+        v1.vector_init_range_elements(z);
+        if(abs(z[2] - 2) < epsilon)
+        {
+            return test_sucess_count;
+        }
+        else
+        {
+            return test_sucess_count += 1;
+        }
+    }
+
+//
 template<typename Vector>
 int test_vector_routines(const int dimension, const double epsilon)
 {   
     int test_sucess = 0;
+    
+    test_sucess += test_const_elem_vector(0, dimension, epsilon);
+    test_sucess += test_range_elem_vector(0, dimension, epsilon);
 
     /// Here you have to implement testing routines for pnla's vector 
     /// structures/classes. If your test fails, set test success to a non zero value;
@@ -46,12 +86,11 @@ int main(int argc, char *argv[])
 {
     int dim = 20;
 
+
  	if(argc == 2)
 	{
          dim = std::stoi(argv[1]);
 	}
-
-    std::cout << dim;
 
     const double epsilon(std::numeric_limits<double>::epsilon()); 
     int test_result = 0; 
@@ -69,3 +108,6 @@ int main(int argc, char *argv[])
 
     return test_result;
 }
+
+
+

@@ -20,4 +20,7 @@ add_test(NAME Test_vectors_default COMMAND test_vectors)
 # Add a testing call of test_vectors with one argument
 add_test(NAME Test_vectors_dim_20 COMMAND test_vectors 20) 
 
+# Add a testing call of test_vectors with one argument
+add_test(NAME Test_vectors_dim_200 COMMAND test_vectors 200) 
+
 
