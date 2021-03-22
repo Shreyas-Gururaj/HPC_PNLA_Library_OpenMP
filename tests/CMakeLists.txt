@@ -17,10 +17,10 @@ enable_testing()
 # Add a testing call of test_vectors with no arguments
 add_test(NAME Test_vectors_default COMMAND test_vectors)
 
-# Add a testing call of test_vectors with one argument
-add_test(NAME Test_vectors_dim_20 COMMAND test_vectors 20) 
+# Add a testing call of test_vectors with one argument (dimension = 1000)
+add_test(NAME Test_vectors_dim_1000 COMMAND test_vectors 1000)
 
-# Add a testing call of test_vectors with one argument
-add_test(NAME Test_vectors_dim_200 COMMAND test_vectors 200) 
+# Add a testing call of test_vectors with one argument (dimension = 10000)
+add_test(NAME Test_vectors_dim_10000 COMMAND test_vectors 10000)
 
 

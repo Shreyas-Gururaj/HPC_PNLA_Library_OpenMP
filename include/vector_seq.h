@@ -62,13 +62,13 @@ namespace pnla{
             void vector_init_std_doubles(std::vector<double> &init_vector);
 
             //
-            void vector_copy(std::vector<double> &init_vector, std::vector<double> &to_copy_vector);
+            std::vector<double> vector_copy(std::vector<double> &init_vector);
 
             //
             void vector_scale(std::vector<double> &init_vector, const double scaling_factor);
 
             //
-            void vector_dot_product(std::vector<double> &init_vector, std::vector<double> &vector_for_dot_prod);
+            double vector_dot_product(std::vector<double> &init_vector, std::vector<double> &vector_for_dot_prod);
 
             //
             void vector_euclidean_norm(std::vector<double> &init_vector);

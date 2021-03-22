@@ -49,21 +49,11 @@ namespace pnla{
     }
 
     //
-    void Vector_n_dim::vector_copy(std::vector<double> &init_vector, std::vector<double> &to_copy_vector)
+    std::vector<double> Vector_n_dim::vector_copy(std::vector<double> &init_vector)
 
     {
-        if(init_vector.size() == to_copy_vector.size())
-        {
-            for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
-            {
-                to_copy_vector[elem_index] = init_vector[elem_index];
-            }
-        }
-
-         else
-        {
-            std::cout << "Dimensions of the vectors do not match and cannot be copied" << std::endl;
-        }
+        vector<double> new_copy_y_(init_vector);
+        return new_copy_y_;
     }
 
     //
@@ -76,7 +66,7 @@ namespace pnla{
     }
 
     //
-    void Vector_n_dim::vector_dot_product(std::vector<double> &init_vector, std::vector<double> &vector_for_dot_prod)
+    double Vector_n_dim::vector_dot_product(std::vector<double> &init_vector, std::vector<double> &vector_for_dot_prod)
     {
         double result_dot_prod = 0;
 
@@ -94,6 +84,7 @@ namespace pnla{
         {
             std::cout << "Dimensions of the vectors do not match and dot product cannot be performed" << std::endl;
         }
+        return result_dot_prod;
     }
 
     //
