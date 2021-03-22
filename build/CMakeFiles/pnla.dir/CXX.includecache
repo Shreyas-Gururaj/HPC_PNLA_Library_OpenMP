@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+../include/CRS_Matrix.h
+iostream
+-
+vector
+-
+string
+-
+
 ../include/vector_seq.h
 iostream
 -
@@ -15,10 +23,14 @@ string
 -
 
 /home/nuss/75/bt717775/PNLA_Shreyas/src/CRS_Matrix.cpp
+CRS_Matrix.h
+/home/nuss/75/bt717775/PNLA_Shreyas/src/CRS_Matrix.h
+cmath
+-
 
 /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
 vector_seq.h
--
+/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.h
 cmath
 -
 

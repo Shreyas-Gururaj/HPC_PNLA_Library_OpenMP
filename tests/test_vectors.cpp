@@ -16,6 +16,8 @@
 
 using namespace std;
 
+const double initial_values = 5.0;
+
 
 /**
  * @brief Bare bone function template for testing. The beauty of templates is, that you
@@ -31,117 +33,125 @@ using namespace std;
 //
 int test_const_elem_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
         const double const_value = 4.0;
+
+        pnla::vector_seq obj_const_elem(dimension, initial_values);
+        obj_const_elem.vector_init_constant_elements(obj_const_elem, const_value);
+
+        for(unsigned int i =0; i < obj_const_elem.values.size(); i++)
+        {
+            if(abs(obj_const_elem.values[i] - const_value) < epsilon)
+            {
+                continue;
+            }
+            else
+            {
+                test_sucess_count += 1;
+            }
+        }
         
-        v1.vector_init_constant_elements(z, const_value);
-        if(abs(z[2] - const_value) < epsilon)
-        {
-            return test_sucess_count;
-        }
-        else
-        {
-            return test_sucess_count += 1;
-        }
+        return test_sucess_count;
     }
 
 //
+
 int test_range_elem_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
+        pnla::vector_seq obj_range_elem(dimension, initial_values);
+        obj_range_elem.vector_init_range_elements(obj_range_elem);
+
+        for(unsigned int i =0; i < obj_range_elem.values.size(); i++)
+        {
+            if(abs(obj_range_elem.values[i] - i) < epsilon)
+            {
+                continue;
+            }
+            else
+            {
+                test_sucess_count += 1;
+            }
+        }
         
-        v1.vector_init_range_elements(z);
-        if(abs(z[2] - 2) < epsilon)
-        {
-            return test_sucess_count;
-        }
-        else
-        {
-            return test_sucess_count += 1;
-        }
+        return test_sucess_count;
     }
 
 //
 int test_std_double_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
-        std::vector<double> std_double(z.size());
-        v1.vector_init_std_doubles(z);
-        if(abs(z[2] - std_double[2]) < epsilon)
+        pnla::vector_seq obj_std_double(dimension, initial_values);
+        obj_std_double.vector_init_std_doubles(obj_std_double);
+        std::vector<double> std_vector(obj_std_double.values.size());
+
+        for(unsigned int i =0; i < obj_std_double.values.size(); i++)
         {
-            return test_sucess_count;
+            if(abs(obj_std_double.values[i] - std_vector[i]) < epsilon)
+            {
+                continue;
+            }
+            else
+            {
+                test_sucess_count += 1;
+            }
         }
-        else
-        {
-            return test_sucess_count += 1;
-        }
+        
+        return test_sucess_count;
     }
 
 //
 int test_copy_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
-        std::vector<double> y = v1.vector_copy(z);
-        if(abs(z[2] - y[2]) < epsilon)
+
+        pnla::vector_seq obj_initial(dimension, initial_values);
+        pnla::vector_seq obj_copy(dimension, 7.5);
+        obj_copy.vector_copy(obj_initial, obj_copy);
+
+        for(unsigned int i =0; i < obj_initial.values.size(); i++)
         {
-            return test_sucess_count;
+            if(abs(obj_copy.values[i] - obj_initial.values[i]) < epsilon)
+            {
+                continue;
+            }
+            else
+            {
+                test_sucess_count += 1;
+            }
         }
-        else
-        {
-            return test_sucess_count += 1;
-        }
+        
+        return test_sucess_count;
     }
 
 //
 int test_scale_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
-        const double scale_factor = 6.5;
-        v1.vector_scale(z, scale_factor);
+        const double scaling_factor = 9.6;
+        pnla::vector_seq obj_scale(dimension, initial_values);
+        pnla::vector_seq obj_target(dimension, initial_values);
+        obj_scale.vector_scale(obj_scale, scaling_factor);
+        std::vector<double> std_vector(obj_scale.values.size());
 
-        if(abs((z[2]/scale_factor) - 1.0) < epsilon)
+        for(unsigned int i =0; i < obj_scale.values.size(); i++)
         {
-            return test_sucess_count;
+            if(abs((obj_scale.values[i]/scaling_factor) - obj_target.values[i]) < epsilon)
+            {
+                continue;
+            }
+            else
+            {
+                test_sucess_count += 1;
+            }
         }
-        else
-        {
-            return test_sucess_count += 1;
-        }
-    }
-
-//
-int test_dot_product_vector(int test_sucess_count, const int dimension, const double epsilon)
-    {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
-        std::vector<double> y(dimension, 30.0);
-        const double dot_product_calculated = dimension * y[0] * z[0];
-        double dot_product_from_function = v1.vector_dot_product(z, y);
-
-        if(abs((dot_product_calculated - dot_product_from_function) < epsilon))
-        {
-            return test_sucess_count;
-        }
-        else
-        {
-            return test_sucess_count += 1;
-        }
+        
+        return test_sucess_count;
     }
 
 //
 int test_eucledian_norm_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
-        const double norm_calculated = sqrt(dimension);
-        double norm_from_function = v1.vector_euclidean_norm(z);
+        pnla::vector_seq obj_norm(dimension, 1.0);
+        const double norm_target = sqrt(dimension);                                               
+        double norm_from_function = obj_norm.vector_dot_product(obj_norm, obj_norm);
 
-        if(abs((norm_calculated - norm_from_function) < epsilon))
+        if(abs((norm_target - norm_from_function) < epsilon))
         {
             return test_sucess_count;
         }
@@ -154,15 +164,11 @@ int test_eucledian_norm_vector(int test_sucess_count, const int dimension, const
 //
 int test_scaled_addition_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
-        pnla::Vector_n_dim v1(dimension);
-        std::vector<double> z = v1.get_init_vector();
-        std::vector<double> y (dimension, 1.0);
-        const double scale_factor = 6.5;
-        const double result_scaled_addition = y[2] + (scale_factor * z[2]);
+        pnla::vector_seq obj_scaled_add_x(dimension, 0.0);
+        pnla::vector_seq obj_scaled_add_y(dimension, 0.0);                                               
+        double norm_from_function = obj_scaled_add_x.vector_dot_product(obj_scaled_add_x, obj_scaled_add_y);
 
-        v1.vector_scaled_addition(z, y, scale_factor);
-
-        if(abs((result_scaled_addition - y[2])) < epsilon)
+        if(abs((norm_from_function - 0.0) < epsilon))
         {
             return test_sucess_count;
         }
@@ -187,7 +193,6 @@ int test_vector_routines(const int dimension, const double epsilon)
     test_sucess += test_std_double_vector(test_count, dimension, epsilon);
     test_sucess += test_copy_vector(test_count, dimension, epsilon);
     test_sucess += test_scale_vector(test_count, dimension, epsilon);
-    test_sucess += test_dot_product_vector(test_count, dimension, epsilon);
     test_sucess += test_eucledian_norm_vector(test_count, dimension, epsilon);
     test_sucess += test_scaled_addition_vector(test_count, dimension, epsilon);
 
@@ -217,7 +222,7 @@ int main(int argc, char *argv[])
     std::cout<<"Test Sequential Vector"<<std::endl;
 
     /// call of test_vector should look something like this
-    test_result = test_vector_routines<pnla::Vector_n_dim>(dim, epsilon);
+    test_result = test_vector_routines<pnla::vector_seq>(dim, epsilon);
 
     // Just for illustration of template function and to surpress warnings
     //test_result = test_vector_routines<double>(dim, epsilon);

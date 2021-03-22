@@ -16,7 +16,7 @@ string
 
 /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
 vector_seq.h
--
+/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.h
 cmath
 -
 
@@ -28,7 +28,7 @@ string
 limits
 -
 vector_seq.h
--
+/home/nuss/75/bt717775/PNLA_Shreyas/tests/vector_seq.h
 cmath
 -
 

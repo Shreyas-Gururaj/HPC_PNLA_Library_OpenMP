@@ -25,69 +25,56 @@ namespace pnla{
     /// Start here with the defenition of your struct/class for storing a vector 
     /// of doubles
     
-    class Vector_n_dim
+    class vector_seq      //look for a better name for the class.
     {
         public:
-
-            //
-            Vector_n_dim() = delete;
-
-            
-            Vector_n_dim(const unsigned int dimension)
-            {
-                vector_dimension= dimension;
-                x.assign(vector_dimension, 1.0);
-            }
-
-            //
-            unsigned int get_vector_dimension() 
-            { 
-             return vector_dimension; 
-            }
-
-            //
-            std::vector <double> get_init_vector()
-            {
-             return x;
-            }
-
-
-            //
-            void vector_init_constant_elements(std::vector<double> &init_vector, const double constant_value);
-
-            //
-            void vector_init_range_elements(std::vector<double> &init_vector);
-
-            //
-            void vector_init_std_doubles(std::vector<double> &init_vector);
-
-            //
-            std::vector<double> vector_copy(std::vector<double> &init_vector);
-
-            //
-            void vector_scale(std::vector<double> &init_vector, const double scaling_factor);
-
-            //
-            double vector_dot_product(std::vector<double> &init_vector, std::vector<double> &vector_for_dot_prod);
-
-            //
-            double vector_euclidean_norm(std::vector<double> &init_vector);
-
-            //
-            std::vector<double> vector_scaled_addition(std::vector<double> &init_vector, std::vector<double> &to_scale_vector, const double scaling_factor_add);
-
-        private:
 
             //
             unsigned int vector_dimension;
 
             //
-            std::vector <double> x;
+            std::vector<double> values; 
+
+            //
+            vector_seq() = delete;
+
+            
+            vector_seq(const unsigned int dimension, const double initial_values)
+            {
+                vector_dimension= dimension;
+                values.assign(vector_dimension, initial_values);
+            }
+
+            //
+            void vector_init_constant_elements(vector_seq &obj_const_elem, const double constant_value);
+
+            //
+            void vector_init_range_elements(vector_seq &obj_range_elem);
+
+            //
+            void vector_init_std_doubles(vector_seq &obj_std_doubles);
+
+            //
+            void vector_copy(const vector_seq &obj_initial, vector_seq &obj_to_be_copied);
+
+            //
+            void vector_scale(vector_seq &obj_scale, const double scaling_factor);
+
+            //
+            double vector_dot_product(const vector_seq &obj_dot_x, const vector_seq &obj_dot_y);
+
+            //
+            double vector_euclidean_norm(const vector_seq &obj_norm_x);
+
+            //
+            void vector_scaled_addition(vector_seq &obj_scaled_add_y, const vector_seq &obj_scaled_add_x, const double scaling_factor_add);
+
+           //look for a better name for the vector.
 
 
     };
 
 
 }//end namespace pnla
-
+ 
 #endif // __VECTOR_SEQ_H__

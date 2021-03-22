@@ -19,109 +19,82 @@ namespace pnla{
     /// vector routines
 
     //
-    void Vector_n_dim::vector_init_constant_elements(std::vector<double> &init_vector, const double constant_value)
+    void vector_seq::vector_init_constant_elements(vector_seq &obj_const_elem, const double constant_value)
 
     {
-        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < obj_const_elem.values.size(); elem_index++)
         {
-            init_vector[elem_index] = constant_value;
+            obj_const_elem.values[elem_index] = constant_value;
         }
     }
 
     //
-    void Vector_n_dim::vector_init_range_elements(std::vector<double> &init_vector)
+    void vector_seq::vector_init_range_elements(vector_seq &obj_range_elem)
     {
-        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < obj_range_elem.values.size(); elem_index++)
         {
-            init_vector[elem_index] = elem_index;
+            obj_range_elem.values[elem_index] = elem_index;
         }
     }
 
     //
-    void Vector_n_dim::vector_init_std_doubles(std::vector<double> &init_vector)
+    void vector_seq::vector_init_std_doubles(vector_seq &obj_std_doubles)
     {
-        std::vector<double> std_vector(init_vector.size());
-        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        std::vector<double> std_vector(obj_std_doubles.values.size());
+        for(unsigned int elem_index = 0; elem_index < obj_std_doubles.values.size(); elem_index++)
         {
-            init_vector[elem_index] = std_vector[elem_index];
+            obj_std_doubles.values[elem_index] = std_vector[elem_index];
         }
 
     }
 
     //
-    std::vector<double> Vector_n_dim::vector_copy(std::vector<double> &init_vector)
+    void vector_seq::vector_copy(const vector_seq &obj_initial, vector_seq &obj_to_be_copied)
 
     {
-        vector<double> new_copy_y_(init_vector);
-        return new_copy_y_;
-    }
-
-    //
-    void Vector_n_dim::vector_scale(std::vector<double> &init_vector, const double scaling_factor)
-    {
-        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+        for(unsigned int elem_index = 0; elem_index < obj_initial.values.size(); elem_index++)
         {
-            init_vector[elem_index] = init_vector[elem_index] * scaling_factor;
+            obj_to_be_copied.values[elem_index] = obj_initial.values[elem_index];
         }
     }
 
     //
-    double Vector_n_dim::vector_dot_product(std::vector<double> &init_vector, std::vector<double> &vector_for_dot_prod)
+    void vector_seq::vector_scale(vector_seq &obj_scale, const double scaling_factor)
     {
-        double result_dot_prod = 0;
-
-        if(init_vector.size() == vector_for_dot_prod.size())
+        for(unsigned int elem_index = 0; elem_index < obj_scale.values.size(); elem_index++)
         {
-            for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+            obj_scale.values[elem_index] = obj_scale.values[elem_index] * scaling_factor;
+        }
+    }
+
+    //
+    double vector_seq::vector_dot_product(const vector_seq &obj_dot_x, const vector_seq &obj_dot_y)
+    {
+        double result_dot_prod = 0.0;
+
+        for(unsigned int elem_index = 0; elem_index < obj_dot_x.values.size(); elem_index++)
             {
-                result_dot_prod += init_vector[elem_index] * vector_for_dot_prod[elem_index];
+                result_dot_prod += obj_dot_x.values[elem_index] * obj_dot_y.values[elem_index];
             }
 
-            std::cout << "The dot product of vector x and vector y is" << " : " << result_dot_prod;
-        }
-
-        else
-        {
-            std::cout << "Dimensions of the vectors do not match and dot product cannot be performed" << std::endl;
-        }
         return result_dot_prod;
     }
 
     //
-    double Vector_n_dim::vector_euclidean_norm(std::vector<double> &init_vector)
+    double vector_seq::vector_euclidean_norm(const vector_seq &obj_norm_x)
     {
-        double squared_sum = 0;
-        double result_euclidean_norm;
-
-        for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
-        {
-            squared_sum += init_vector[elem_index] * init_vector[elem_index];
-            result_euclidean_norm = sqrt(squared_sum);
-        }
-
-        std::cout << "The Euclidean norm is" << " : " << result_euclidean_norm;
+        double result_euclidean_norm = sqrt(vector_dot_product(obj_norm_x, obj_norm_x));
         return result_euclidean_norm;
 
     }
    
-   //
-   std::vector<double> Vector_n_dim::vector_scaled_addition(std::vector<double> &init_vector, std::vector<double> &to_scale_vector, const double scaling_factor_add)
+   //Return not required.
+   void vector_seq::vector_scaled_addition(vector_seq &obj_scaled_add_y, const vector_seq &obj_scaled_add_x, const double scaling_factor_add)
    {
-       if(init_vector.size() == to_scale_vector.size())
-       {
-           for(unsigned int elem_index = 0; elem_index < init_vector.size(); elem_index++)
+      for(unsigned int elem_index = 0; elem_index < obj_scaled_add_x.values.size(); elem_index++)
            {
-               to_scale_vector[elem_index] = to_scale_vector[elem_index] + scaling_factor_add * init_vector[elem_index];
+               obj_scaled_add_y.values[elem_index] = obj_scaled_add_y.values[elem_index] + scaling_factor_add * obj_scaled_add_x.values[elem_index];
            }
-       }
-
-       else
-       {
-            std::cout << "Dimensions of the vectors do not match and scaled vector addition cannot be performed" << std::endl;
-       }
-
-       return to_scale_vector;
-    
    }
 
 } // end namespace pnla
