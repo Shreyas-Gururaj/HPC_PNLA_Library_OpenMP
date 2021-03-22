@@ -29,8 +29,25 @@ namespace pnla{
             }
 
             //
+            std::vector <double> get_non_zero_vector()
+            {
+             return Matrix_non_zero_elements;
+            }
+            
+            //
+            std::vector <double> col_ind_vector()
+            {
+             return Col_indices_non_zero_elements;
+            }
 
-            void initialize_CRS_Matrix(std::vector<double> Av, );
+            //
+            std::vector <double> row_ind_vector()
+            {
+             return Row_indices_non_zero_elements;
+            }
+
+            //
+            void CRS_scaled_matrix_vector_multiplication(CRS_Matrix_Representation CRS_Matrix, std::vector<double> y);
 
         private:
 

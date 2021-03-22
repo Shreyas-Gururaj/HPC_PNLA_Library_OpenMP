@@ -71,10 +71,10 @@ namespace pnla{
             double vector_dot_product(std::vector<double> &init_vector, std::vector<double> &vector_for_dot_prod);
 
             //
-            void vector_euclidean_norm(std::vector<double> &init_vector);
+            double vector_euclidean_norm(std::vector<double> &init_vector);
 
             //
-            void vector_scaled_addition(std::vector<double> &init_vector, std::vector<double> &to_scale_vector, const double scaling_factor_add);
+            std::vector<double> vector_scaled_addition(std::vector<double> &init_vector, std::vector<double> &to_scale_vector, const double scaling_factor_add);
 
         private:
 

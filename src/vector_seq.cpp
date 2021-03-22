@@ -9,8 +9,8 @@
  * 
  */
 
-#include <vector_seq.h>
-#include<cmath>
+#include "vector_seq.h"
+#include <cmath>
 
 namespace pnla{
 
@@ -88,7 +88,7 @@ namespace pnla{
     }
 
     //
-    void Vector_n_dim::vector_euclidean_norm(std::vector<double> &init_vector)
+    double Vector_n_dim::vector_euclidean_norm(std::vector<double> &init_vector)
     {
         double squared_sum = 0;
         double result_euclidean_norm;
@@ -100,11 +100,12 @@ namespace pnla{
         }
 
         std::cout << "The Euclidean norm is" << " : " << result_euclidean_norm;
+        return result_euclidean_norm;
 
     }
    
    //
-   void Vector_n_dim::vector_scaled_addition(std::vector<double> &init_vector, std::vector<double> &to_scale_vector, const double scaling_factor_add)
+   std::vector<double> Vector_n_dim::vector_scaled_addition(std::vector<double> &init_vector, std::vector<double> &to_scale_vector, const double scaling_factor_add)
    {
        if(init_vector.size() == to_scale_vector.size())
        {
@@ -113,6 +114,13 @@ namespace pnla{
                to_scale_vector[elem_index] = to_scale_vector[elem_index] + scaling_factor_add * init_vector[elem_index];
            }
        }
+
+       else
+       {
+            std::cout << "Dimensions of the vectors do not match and scaled vector addition cannot be performed" << std::endl;
+       }
+
+       return to_scale_vector;
     
    }
 

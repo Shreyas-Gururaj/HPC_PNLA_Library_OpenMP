@@ -11,7 +11,7 @@
 #include <iostream>
 #include <string>
 #include <limits> //epsilon()
-#include <vector_seq.h>
+#include "vector_seq.h"
 #include <cmath>
 
 using namespace std;
@@ -134,6 +134,45 @@ int test_dot_product_vector(int test_sucess_count, const int dimension, const do
     }
 
 //
+int test_eucledian_norm_vector(int test_sucess_count, const int dimension, const double epsilon)
+    {
+        pnla::Vector_n_dim v1(dimension);
+        std::vector<double> z = v1.get_init_vector();
+        const double norm_calculated = sqrt(dimension);
+        double norm_from_function = v1.vector_euclidean_norm(z);
+
+        if(abs((norm_calculated - norm_from_function) < epsilon))
+        {
+            return test_sucess_count;
+        }
+        else
+        {
+            return test_sucess_count += 1;
+        }
+    }
+
+//
+int test_scaled_addition_vector(int test_sucess_count, const int dimension, const double epsilon)
+    {
+        pnla::Vector_n_dim v1(dimension);
+        std::vector<double> z = v1.get_init_vector();
+        std::vector<double> y (dimension, 1.0);
+        const double scale_factor = 6.5;
+        const double result_scaled_addition = y[2] + (scale_factor * z[2]);
+
+        v1.vector_scaled_addition(z, y, scale_factor);
+
+        if(abs((result_scaled_addition - y[2])) < epsilon)
+        {
+            return test_sucess_count;
+        }
+        else
+        {
+            return test_sucess_count += 1;
+        }
+    }
+
+//
 template<typename Vector>
 int test_vector_routines(const int dimension, const double epsilon)
 {   
@@ -149,7 +188,8 @@ int test_vector_routines(const int dimension, const double epsilon)
     test_sucess += test_copy_vector(test_count, dimension, epsilon);
     test_sucess += test_scale_vector(test_count, dimension, epsilon);
     test_sucess += test_dot_product_vector(test_count, dimension, epsilon);
-
+    test_sucess += test_eucledian_norm_vector(test_count, dimension, epsilon);
+    test_sucess += test_scaled_addition_vector(test_count, dimension, epsilon);
 
     return test_sucess;
 }
