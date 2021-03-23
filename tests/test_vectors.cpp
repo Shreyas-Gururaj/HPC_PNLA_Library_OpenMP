@@ -176,17 +176,56 @@ int test_scaled_addition_vector(int test_sucess_count, const int dimension, cons
             return test_sucess_count += 1;
         }
     }
+*/
 
 //
-*/
-template<typename Vector>
+int test_const_norm(int test_sucess_count, const int dimension, const double epsilon)
+{
+    pnla::vector_seq const_norm_x;
+    pnla::vector_init_constant_elements(const_norm_x, dimension, 1.0);
+    double norm_function = pnla::vector_euclidean_norm(const_norm_x);
+    double norm_target = sqrt(dimension);
+
+    if(abs(norm_function - norm_target) > epsilon)
+    {
+        return test_sucess_count + 1;
+        std::cout << "Either the constant element initialization or the Eucledian norm does not work as intended";
+    }
+
+    return test_sucess_count;
+
+}
+
+//
+int test_range_norm(int test_sucess_count, const int dimension, const double epsilon)
+{
+    pnla::vector_seq const_norm_y;
+    pnla::vector_init_range_elements(const_norm_y, dimension);
+    double dot_function = pnla::vector_euclidean_norm(const_norm_y);
+    double dot_target = 0.0;
+
+    for(int i = 0; i < dimension; i++)
+    {
+        
+    }
+
+    if(abs(dot_function - dot_target) > epsilon)
+    {
+        return test_sucess_count + 1;
+        std::cout << "Either the constant element initialization or the Eucledian norm does not work as intended";
+    }
+
+    return test_sucess_count;
+}
+
+//
+template<typename Vector>     //in the template function definition "Vector" is an alias for the struct
 int test_vector_routines(const int dimension, const double epsilon)
 {   
     int test_sucess = 0;
-    Vector const_norm_x;                                       //in the template function definition "Vector" is an alias for the struct
-
-    pnla::vector_init_constant_elements(const_norm_x, 1.0);
-    std::cout << const_norm_x.values[5];
+ 
+    //
+    test_sucess += test_const_norm(test_sucess, dimension, epsilon);
 
 
 

@@ -25,37 +25,37 @@ namespace pnla{
     
     struct vector_seq        
     {
-            //
-            unsigned int vector_dimension;
+        //
+        unsigned int vector_dimension;
 
-            //
-            std::vector<double> values; 
+        //
+        std::vector<double> values; 
 
     };
 
-            //
-            void vector_init_constant_elements(vector_seq &obj_const_elem, const double constant_value);
+        //
+        void vector_init_constant_elements(vector_seq &obj_const_elem, const int vector_dimension, const double constant_value);
 
-            //
-            void vector_init_range_elements(vector_seq &obj_range_elem);
+        //
+        void vector_init_range_elements(vector_seq &obj_range_elem, const int vector_dimension);
 
-            //
-            void vector_init_std_doubles(vector_seq &obj_std_doubles);
+        //
+        void vector_init_std_doubles(vector_seq &obj_std_doubles, const int vector_dimension);
 
-            //
-            void vector_copy(const vector_seq &obj_initial, vector_seq &obj_to_be_copied);
+        //
+        void vector_copy(const vector_seq &obj_initial, vector_seq &obj_to_be_copied);
 
-            //
-            void vector_scale(vector_seq &obj_scale, const double scaling_factor);
+        //
+        void vector_scale(vector_seq &obj_scale, const double scaling_factor);
 
-            //
-            double vector_dot_product(const vector_seq &obj_dot_x, const vector_seq &obj_dot_y);
+        //
+        double vector_dot_product(const vector_seq &obj_dot_x, const vector_seq &obj_dot_y);
 
-            //
-            double vector_euclidean_norm(const vector_seq &obj_norm_x);
+        //
+        double vector_euclidean_norm(const vector_seq &obj_norm_x);
 
-            //
-            void vector_scaled_addition(vector_seq &obj_scaled_add_y, const vector_seq &obj_scaled_add_x, const double scaling_factor_add);
+        //
+        void vector_scaled_addition(vector_seq &obj_scaled_add_y, const vector_seq &obj_scaled_add_x, const double scaling_factor_add);
 
 
 

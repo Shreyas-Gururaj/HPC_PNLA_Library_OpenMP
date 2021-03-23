@@ -19,9 +19,10 @@ namespace pnla{
     /// vector routines
 
     //
-    void vector_init_constant_elements(vector_seq &obj_const_elem, const double constant_value)
+    void vector_init_constant_elements(vector_seq &obj_const_elem, const int vector_dimension, const double constant_value)
 
     {
+        obj_const_elem.values.resize(vector_dimension);
         for(unsigned int elem_index = 0; elem_index < obj_const_elem.values.size(); elem_index++)
         {
             obj_const_elem.values[elem_index] = constant_value;
@@ -29,8 +30,9 @@ namespace pnla{
     }
 
     //
-    void vector_init_range_elements(vector_seq &obj_range_elem)
+    void vector_init_range_elements(vector_seq &obj_range_elem, const int vector_dimension)
     {
+        obj_range_elem.values.resize(vector_dimension);
         for(unsigned int elem_index = 0; elem_index < obj_range_elem.values.size(); elem_index++)
         {
             obj_range_elem.values[elem_index] = static_cast<double>(elem_index);
@@ -38,8 +40,9 @@ namespace pnla{
     }
 
     //
-    void vector_init_std_doubles(vector_seq &obj_std_doubles)
+    void vector_init_std_doubles(vector_seq &obj_std_doubles, const int vector_dimension)
     {
+        obj_std_doubles.values.resize(vector_dimension);
         std::vector<double> std_vector(obj_std_doubles.values.size());
         for(unsigned int elem_index = 0; elem_index < obj_std_doubles.values.size(); elem_index++)
         {
