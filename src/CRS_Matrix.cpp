@@ -4,14 +4,21 @@
 namespace pnla{
 
     //
-    void CRS_scaled_matrix_vector_multiplication(CRS_Matrix_Representation CRS_Matrix, std::vector<double> y)
+    void CRS_Matrix::CRS_scaled_matrix_vector_multiplication(const CRS_Matrix &obj_CRS_Matrix, const std::vector<double> x, 
+                                                             std::vector<double> y, const double alpha, const double beta)
     {
-        pnla::CRS_Matrix_Representation CRS_1(10, 10, 20);
-        
-        std::vector<double> A_v = CRS_1.get_non_zero_vector();
-        std::vector<double> J_a = CRS_1.col_ind_vector();
-        std::vector<double> I_a = CRS_1.row_ind_vector();
+        for(unsigned int i = 0; i < obj_CRS_Matrix.total_num_of_rows; i++)
+        {
+            y[i] = 0.0;
+            
+            for(unsigned int k = obj_CRS_Matrix.Row_indices_non_zero_elements[i]; k < obj_CRS_Matrix.Row_indices_non_zero_elements[i + 1] - 1; k++)
+                {
+                    y[i] = (alpha * (obj_CRS_Matrix.Matrix_non_zero_elements[k] * x[obj_CRS_Matrix.Row_indices_non_zero_elements[k]])) + (beta * y[i]);
 
+                }
+        }
+
+       
     }
 
     

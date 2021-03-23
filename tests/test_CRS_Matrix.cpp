@@ -14,6 +14,7 @@
 #include "vector_seq.h"
 #include <cmath>
 
+using namespace std;
 
 const double initial_values = 5.0;
 
@@ -28,7 +29,7 @@ const double initial_values = 5.0;
  * @param epsilon 
  * @return int 
  */
-/*
+
 //
 int test_const_elem_vector(int test_sucess_count, const int dimension, const double epsilon)
     {
@@ -41,7 +42,7 @@ int test_const_elem_vector(int test_sucess_count, const int dimension, const dou
         {
             if(abs(obj_const_elem.values[i] - const_value) < epsilon)
             {
-                continue;                                                  //Avoid using continue
+                continue;
             }
             else
             {
@@ -178,22 +179,13 @@ int test_scaled_addition_vector(int test_sucess_count, const int dimension, cons
     }
 
 //
-*/
 template<typename Vector>
 int test_vector_routines(const int dimension, const double epsilon)
 {   
-    int test_sucess = 0;
-    Vector const_norm_x;                                       //in the template function definition "Vector" is an alias for the struct
-
-    pnla::vector_init_constant_elements(const_norm_x, 1.0);
-    std::cout << const_norm_x.values[5];
-
-
-
     /// Here you have to implement testing routines for pnla's vector 
     /// structures/classes. If your test fails, set test success to a non zero value;
 
-    /*int test_sucess = 0;
+    int test_sucess = 0;
     const int test_count = 0;
     std::cout << dimension << std::endl;
     test_sucess += test_const_elem_vector(test_count, dimension, epsilon);
@@ -202,7 +194,7 @@ int test_vector_routines(const int dimension, const double epsilon)
     test_sucess += test_copy_vector(test_count, dimension, epsilon);
     test_sucess += test_scale_vector(test_count, dimension, epsilon);
     test_sucess += test_eucledian_norm_vector(test_count, dimension, epsilon);
-    test_sucess += test_scaled_addition_vector(test_count, dimension, epsilon);*/
+    test_sucess += test_scaled_addition_vector(test_count, dimension, epsilon);
 
     return test_sucess;
 }

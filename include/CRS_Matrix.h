@@ -9,15 +9,23 @@
 
 namespace pnla{
 
-    class CRS_Matrix_Representation
+    class CRS_Matrix
     {
         public:
 
-            CRS_Matrix_Representation() = delete;
+            unsigned int total_num_of_rows;
+            unsigned int total_num_of_columns;
+            unsigned int total_non_zero_elements;
+
+            std::vector<double> Matrix_non_zero_elements;
+            std::vector<double> Col_indices_non_zero_elements;
+            std::vector<double> Row_indices_non_zero_elements;
+
+            CRS_Matrix() = delete;
 
 
             //
-            CRS_Matrix_Representation(const unsigned int num_of_rows, const unsigned int num_of_columns, const unsigned int num_non_zero_entries)
+            CRS_Matrix(const unsigned int num_of_rows, const unsigned int num_of_columns, const unsigned int num_non_zero_entries)
             {
                 total_num_of_rows = num_of_rows;
                 total_num_of_columns = num_of_columns;
@@ -29,37 +37,8 @@ namespace pnla{
             }
 
             //
-            std::vector <double> get_non_zero_vector()
-            {
-             return Matrix_non_zero_elements;
-            }
-            
-            //
-            std::vector <double> col_ind_vector()
-            {
-             return Col_indices_non_zero_elements;
-            }
-
-            //
-            std::vector <double> row_ind_vector()
-            {
-             return Row_indices_non_zero_elements;
-            }
-
-            //
-            void CRS_scaled_matrix_vector_multiplication(CRS_Matrix_Representation CRS_Matrix, std::vector<double> y);
-
-        private:
-
-
-            unsigned int total_num_of_rows;
-            unsigned int total_num_of_columns;
-            unsigned int total_non_zero_elements;
-
-            std::vector<double> Matrix_non_zero_elements;
-            std::vector<double> Col_indices_non_zero_elements;
-            std::vector<double> Row_indices_non_zero_elements;
-
+            void CRS_scaled_matrix_vector_multiplication(const CRS_Matrix &obj_CRS_Matrix, const std::vector<double> x, 
+                                                         std::vector<double> y, const double alpha, const double beta);
     };
 }//end namespace pnla
 

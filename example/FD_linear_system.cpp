@@ -14,7 +14,7 @@
 
 void FD_Linear_System::get_crs_matrix_vectors(std::vector<double> &values,
                                               std::vector<int> &col_indices,
-                                              std::vector<int> &row_indices) 
+                                              std::vector<int> &row_indices)const
 {
     const int nr_non_zero_entries(5*m_N*m_N - 4*m_N);
     const int dim = m_N * m_N;
@@ -77,7 +77,7 @@ void FD_Linear_System::get_crs_matrix_vectors(std::vector<double> &values,
 
 }
 
-void FD_Linear_System::get_test_vector(std::vector<double> &test_vector) 
+void FD_Linear_System::get_test_vector(std::vector<double> &test_vector)const
 {
     if(m_N == 1)
     {
@@ -101,7 +101,7 @@ void FD_Linear_System::get_test_vector(std::vector<double> &test_vector)
     }
 }
 
-void FD_Linear_System::get_x(std::vector<double> &x) 
+void FD_Linear_System::get_x(std::vector<double> &x)const
 {
     x.resize(m_N*m_N, 0.0);
     double x_1(0);
@@ -111,14 +111,14 @@ void FD_Linear_System::get_x(std::vector<double> &x)
     {
         for(int j=0; j<m_N;j++)
         {
-            x_1 = m_h * static_cast<double>(j+1);
+            x_1 = m_h * static_cast<double>(j+1);                        
             x_2 = m_h * static_cast<double>(i+1);
             x[j+i*m_N] = sin(pi*x_1) * cos(0.5*pi*x_2); 
         }
     }
 }
 
-void FD_Linear_System::get_b(std::vector<double> &b) 
+void FD_Linear_System::get_b(std::vector<double> &b)const
 {
     get_x(b);
     double coefficient = 1.25 * m_h*m_h * pi*pi;

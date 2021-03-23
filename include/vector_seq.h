@@ -17,33 +17,21 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
 /// put everything of the PNLA-library into the suitable namespace
 namespace pnla{
 
     /// Start here with the defenition of your struct/class for storing a vector 
     /// of doubles
     
-    class vector_seq      //look for a better name for the class.
+    struct vector_seq        
     {
-        public:
-
             //
             unsigned int vector_dimension;
 
             //
             std::vector<double> values; 
 
-            //
-            vector_seq() = delete;
-
-            
-            vector_seq(const unsigned int dimension, const double initial_values)
-            {
-                vector_dimension= dimension;
-                values.assign(vector_dimension, initial_values);
-            }
+    };
 
             //
             void vector_init_constant_elements(vector_seq &obj_const_elem, const double constant_value);
@@ -69,10 +57,6 @@ namespace pnla{
             //
             void vector_scaled_addition(vector_seq &obj_scaled_add_y, const vector_seq &obj_scaled_add_x, const double scaling_factor_add);
 
-           //look for a better name for the vector.
-
-
-    };
 
 
 }//end namespace pnla
