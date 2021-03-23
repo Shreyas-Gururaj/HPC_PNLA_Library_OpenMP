@@ -7,3 +7,6 @@ CMakeFiles/pnla.dir/src/CRS_Matrix.cpp.o: ../src/CRS_Matrix.cpp
 CMakeFiles/pnla.dir/src/vector_seq.cpp.o: ../include/vector_seq.h
 CMakeFiles/pnla.dir/src/vector_seq.cpp.o: ../src/vector_seq.cpp
 
+CMakeFiles/pnla.dir/src/vector_seq_2.cpp.o: ../include/vector_seq_2.h
+CMakeFiles/pnla.dir/src/vector_seq_2.cpp.o: ../src/vector_seq_2.cpp
+

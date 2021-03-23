@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pnla.dir/src/CRS_Matrix.cpp.o"
   "CMakeFiles/pnla.dir/src/vector_seq.cpp.o"
+  "CMakeFiles/pnla.dir/src/vector_seq_2.cpp.o"
   "libpnla.pdb"
   "libpnla.a"
 )

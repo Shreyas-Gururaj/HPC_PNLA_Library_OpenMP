@@ -203,6 +203,33 @@ src/vector_seq.cpp.s:
 	$(MAKE) -f CMakeFiles/pnla.dir/build.make CMakeFiles/pnla.dir/src/vector_seq.cpp.s
 .PHONY : src/vector_seq.cpp.s
 
+src/vector_seq_2.o: src/vector_seq_2.cpp.o
+
+.PHONY : src/vector_seq_2.o
+
+# target to build an object file
+src/vector_seq_2.cpp.o:
+	$(MAKE) -f CMakeFiles/pnla.dir/build.make CMakeFiles/pnla.dir/src/vector_seq_2.cpp.o
+.PHONY : src/vector_seq_2.cpp.o
+
+src/vector_seq_2.i: src/vector_seq_2.cpp.i
+
+.PHONY : src/vector_seq_2.i
+
+# target to preprocess a source file
+src/vector_seq_2.cpp.i:
+	$(MAKE) -f CMakeFiles/pnla.dir/build.make CMakeFiles/pnla.dir/src/vector_seq_2.cpp.i
+.PHONY : src/vector_seq_2.cpp.i
+
+src/vector_seq_2.s: src/vector_seq_2.cpp.s
+
+.PHONY : src/vector_seq_2.s
+
+# target to generate assembly for a file
+src/vector_seq_2.cpp.s:
+	$(MAKE) -f CMakeFiles/pnla.dir/build.make CMakeFiles/pnla.dir/src/vector_seq_2.cpp.s
+.PHONY : src/vector_seq_2.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -220,6 +247,9 @@ help:
 	@echo "... src/vector_seq.o"
 	@echo "... src/vector_seq.i"
 	@echo "... src/vector_seq.s"
+	@echo "... src/vector_seq_2.o"
+	@echo "... src/vector_seq_2.i"
+	@echo "... src/vector_seq_2.s"
 .PHONY : help
 
 

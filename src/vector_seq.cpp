@@ -1,9 +1,9 @@
 /**
  * @file vector_seq.cpp
- * @author Thomas Rau (thomas1.rau@uni-bayreuth.de)
- * @brief Barebone structure of a pnla source file
+ * @author your name (you@domain.com)
+ * @brief 
  * @version 0.1
- * @date 2021-03-14
+ * @date 2021-03-23
  * 
  * @copyright Copyright (c) 2021
  * 

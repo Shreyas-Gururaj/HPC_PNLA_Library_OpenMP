@@ -22,6 +22,14 @@ vector
 string
 -
 
+../include/vector_seq_2.h
+iostream
+-
+vector
+-
+string
+-
+
 /home/nuss/75/bt717775/PNLA_Shreyas/src/CRS_Matrix.cpp
 CRS_Matrix.h
 /home/nuss/75/bt717775/PNLA_Shreyas/src/CRS_Matrix.h
@@ -31,6 +39,12 @@ cmath
 /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
 vector_seq.h
 /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.h
+cmath
+-
+
+/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq_2.cpp
+vector_seq_2.h
+/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq_2.h
 cmath
 -
 
