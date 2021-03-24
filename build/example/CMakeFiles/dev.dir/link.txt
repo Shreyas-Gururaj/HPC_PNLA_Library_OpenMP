@@ -1,1 +1,1 @@
-/usr/bin/c++   -std=c++11 -Wall   CMakeFiles/dev.dir/develop.cpp.o CMakeFiles/dev.dir/my_utilities.cpp.o  -o dev ../libpnla.a 
+/usr/bin/c++   -std=c++11 -Wall -O3   CMakeFiles/dev.dir/develop.cpp.o CMakeFiles/dev.dir/my_utilities.cpp.o  -o dev ../libpnla.a 

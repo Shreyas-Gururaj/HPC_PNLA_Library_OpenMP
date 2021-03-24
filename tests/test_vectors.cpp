@@ -9,7 +9,6 @@
  * 
  */
 #include <iostream>
-#include <string>
 #include <limits> //epsilon()
 #include "vector_seq.h"
 #include <cmath>
@@ -19,7 +18,7 @@
 template<typename Vector>
 int test_const_norm(int test_sucess_count, const int dimension, const double epsilon)
 {
-    Vector const_norm_x;
+    Vector const_norm_x;   //May be a better name with vector
     pnla::vector_init_constant_elements(const_norm_x, dimension, 1.0);
     double norm_function = pnla::vector_euclidean_norm(const_norm_x);
     double norm_target = sqrt(dimension);
@@ -124,10 +123,6 @@ int main(int argc, char *argv[])
     std::cout<<"Test Sequential Vector"<<std::endl;
     /// call of test_vector should look something like this
     test_result = test_vector_routines<pnla::vector_seq>(dim, epsilon);
-
-
-    // Just for illustration of template function and to surpress warnings
-    //test_result = test_vector_routines<double>(dim, epsilon);
 
     if(test_result !=0 )
         return test_result;

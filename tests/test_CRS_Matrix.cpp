@@ -16,25 +16,47 @@
 #include <cmath>
 
 //
-template<typename Matrix>
+template<typename Matrix, typename Vector>
 int test_Matrix_init(int test_sucess_count, const int inner_points, const double epsilon)
 {
-    Matrix CRS_init;
-    pnla::CRS_Matrix_initialization(CRS_init, 6, 10);
-    FD_Linear_System::get_crs_matrix_vectors(CRS_init.Matrix_non_zero_elements, CRS_init.Col_indices_non_zero_elements, CRS_init.Row_indices_non_zero_elements)
-    double norm_function = pnla::vector_euclidean_norm(range_norm_y);
-    double norm_target = 0.0;
+    const double h = 1/static_cast<double>(inner_points + 1);
+    FD_Linear_System obj_FD_LS(inner_points, h);
 
-    for(int i = 0; i < dimension; i++)
+    //
+    std::vector<double> values;
+    std::vector<int> columns;
+    std::vector<int> rows;
+    obj_FD_LS.get_crs_matrix_vectors(values, columns, rows);
+
+    //
+    std::vector<double> test_x;
+    obj_FD_LS.get_test_vector(test_x);
+    const int test_x_size = test_x.size();
+
+    //
+    const unsigned int num_of_rows = (rows.size());
+    const unsigned int num_non_zero = (values.size());
+    Matrix CRS_to_store;
+    pnla::CRS_Matrix_initialization(CRS_to_store, num_of_rows, num_non_zero, values, columns, rows);
+
+    //
+    Vector x;
+    Vector y;
+    pnla::vector_init_constant_elements(x, num_of_rows, 1.0);
+    pnla::vector_init_constant_elements(y, num_of_rows, 0.0);
+    pnla::CRS_scaled_matrix_vector_multiplication(CRS_to_store, x, y, 1.0,  1.0);
+
+    //
+    Vector text_x_seq;
+    pnla::vector_init_std_doubles(text_x_seq, test_x, test_x_size);
+    pnla::vector_scaled_addition(y, text_x_seq, -1.0);
+    const double norm_y = pnla::vector_euclidean_norm(y);
+
+    std::cout << norm_y << std::endl;
+
+    if(abs(norm_y) > epsilon)
     {
-        norm_target += static_cast<double>(i * i);
-    }
-
-    norm_target = sqrt(norm_target);
-
-    if(abs(norm_function - norm_target) > epsilon)
-    {
-        std::cout << "The constant element initialization does not work as intended";
+        std::cout << "Either the std double initialization or the CRS initilization or the scaled matrix vector addition does not work as intended";
         return test_sucess_count + 1;
     }
 
@@ -42,43 +64,14 @@ int test_Matrix_init(int test_sucess_count, const int inner_points, const double
 }
 
 //
-template<typename Matrix>
-int test_copy_scaled_add(int test_sucess_count, const int inner_points, const double epsilon)
-{
-    Vector range_y;
-    Vector const_z;
-    pnla::vector_init_range_elements(range_y, dimension);
-    pnla::vector_init_constant_elements(const_z, dimension, 7.5);
-    pnla::vector_copy(range_y, const_z);
-    pnla::vector_scale(const_z, 5.0);
-    pnla::vector_scaled_addition(range_y, const_z, -0.2);
-
-    double norm_function = pnla::vector_euclidean_norm(range_y);
-
-    if(abs(norm_function) > epsilon)
-    {
-        std::cout << "Either the copy_vector or the vector scaling or the scaled vector addition does not work as intended";
-        return test_sucess_count + 1;
-    }
-
-    return test_sucess_count;
-
-}
 
 //
-template<typename Matrix>     //in the template function definition "Vector" is an alias for the struct
+template<typename Matrix, typename Vector>     //in the template function definition "Vector" is an alias for the struct
 int test_vector_routines(const int inner_points, const double epsilon)
 {   
     int test_sucess = 0;
  
-    //
-    test_sucess += test_const_norm<Matrix>(test_sucess, dimension, epsilon);
-
-    //
-    test_sucess += test_range_norm<Vector>(test_sucess, dimension, epsilon);
-
-    //
-    test_sucess += test_copy_scaled_add<Vector>(test_sucess, dimension, epsilon);
+    test_sucess += test_Matrix_init<Matrix, Vector>(test_sucess, dimension, epsilon);
 
     return test_sucess;
 }
@@ -105,11 +98,7 @@ int main(int argc, char *argv[])
 
     std::cout<<"Test sequential CRS_Matrix"<<std::endl;
     /// call of test_vector should look something like this
-    test_result = test_vector_routines<pnla::CRS_Matrix>(total_inner_points, epsilon);
-
-
-    // Just for illustration of template function and to surpress warnings
-    //test_result = test_vector_routines<double>(dim, epsilon);
+    test_result = test_vector_routines<pnla::CRS_Matrix, pnla::vector_seq>(total_inner_points, epsilon);
 
     if(test_result !=0 )
         return test_result;

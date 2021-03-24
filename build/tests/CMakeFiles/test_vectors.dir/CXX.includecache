@@ -7,36 +7,16 @@
 #IncludeRegexTransform: 
 
 ../tests/../include/vector_seq.h
-iostream
--
 vector
--
-string
--
-
-../tests/../include/vector_seq_2.h
-iostream
--
-vector
--
-string
--
-
-/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
-vector_seq.h
-/home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.h
-cmath
 -
 
 /home/nuss/75/bt717775/PNLA_Shreyas/tests/test_vectors.cpp
 iostream
 -
-string
--
 limits
 -
-vector_seq_2.h
-/home/nuss/75/bt717775/PNLA_Shreyas/tests/vector_seq_2.h
+vector_seq.h
+/home/nuss/75/bt717775/PNLA_Shreyas/tests/vector_seq.h
 cmath
 -
 

@@ -125,33 +125,6 @@ test_vectors/fast:
 	cd /home/nuss/75/bt717775/PNLA_Shreyas/build && $(MAKE) -f tests/CMakeFiles/test_vectors.dir/build.make tests/CMakeFiles/test_vectors.dir/build
 .PHONY : test_vectors/fast
 
-__/src/vector_seq.o: __/src/vector_seq.cpp.o
-
-.PHONY : __/src/vector_seq.o
-
-# target to build an object file
-__/src/vector_seq.cpp.o:
-	cd /home/nuss/75/bt717775/PNLA_Shreyas/build && $(MAKE) -f tests/CMakeFiles/test_vectors.dir/build.make tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.o
-.PHONY : __/src/vector_seq.cpp.o
-
-__/src/vector_seq.i: __/src/vector_seq.cpp.i
-
-.PHONY : __/src/vector_seq.i
-
-# target to preprocess a source file
-__/src/vector_seq.cpp.i:
-	cd /home/nuss/75/bt717775/PNLA_Shreyas/build && $(MAKE) -f tests/CMakeFiles/test_vectors.dir/build.make tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.i
-.PHONY : __/src/vector_seq.cpp.i
-
-__/src/vector_seq.s: __/src/vector_seq.cpp.s
-
-.PHONY : __/src/vector_seq.s
-
-# target to generate assembly for a file
-__/src/vector_seq.cpp.s:
-	cd /home/nuss/75/bt717775/PNLA_Shreyas/build && $(MAKE) -f tests/CMakeFiles/test_vectors.dir/build.make tests/CMakeFiles/test_vectors.dir/__/src/vector_seq.cpp.s
-.PHONY : __/src/vector_seq.cpp.s
-
 test_vectors.o: test_vectors.cpp.o
 
 .PHONY : test_vectors.o
@@ -188,9 +161,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test_vectors"
 	@echo "... edit_cache"
-	@echo "... __/src/vector_seq.o"
-	@echo "... __/src/vector_seq.i"
-	@echo "... __/src/vector_seq.s"
 	@echo "... test_vectors.o"
 	@echo "... test_vectors.i"
 	@echo "... test_vectors.s"

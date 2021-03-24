@@ -3,10 +3,8 @@
 
 CMakeFiles/pnla.dir/src/CRS_Matrix.cpp.o
  ../include/CRS_Matrix.h
+ ../include/vector_seq.h
  /home/nuss/75/bt717775/PNLA_Shreyas/src/CRS_Matrix.cpp
 CMakeFiles/pnla.dir/src/vector_seq.cpp.o
  ../include/vector_seq.h
  /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq.cpp
-CMakeFiles/pnla.dir/src/vector_seq_2.cpp.o
- ../include/vector_seq_2.h
- /home/nuss/75/bt717775/PNLA_Shreyas/src/vector_seq_2.cpp

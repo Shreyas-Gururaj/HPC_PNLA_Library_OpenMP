@@ -40,10 +40,10 @@ namespace pnla{
     }
 
     //
-    void vector_init_std_doubles(vector_seq &obj_std_doubles, const int vector_dimension)
+    void vector_init_std_doubles(vector_seq &obj_std_doubles, std::vector<double> &std_vector, const int vector_dimension)
     {
         obj_std_doubles.values.resize(vector_dimension);
-        std::vector<double> std_vector(obj_std_doubles.values.size());
+        std_vector.resize(obj_std_doubles.values.size());
         for(unsigned int elem_index = 0; elem_index < obj_std_doubles.values.size(); elem_index++)
         {
             obj_std_doubles.values[elem_index] = std_vector[elem_index];

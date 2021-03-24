@@ -13,9 +13,7 @@
 #ifndef __VECTOR_SEQ_H__
 #define __VECTOR_SEQ_H__S
 
-#include <iostream>
 #include <vector>
-#include <string>
 
 /// put everything of the PNLA-library into the suitable namespace
 namespace pnla{
@@ -40,7 +38,7 @@ namespace pnla{
         void vector_init_range_elements(vector_seq &obj_range_elem, const int vector_dimension);
 
         //
-        void vector_init_std_doubles(vector_seq &obj_std_doubles, const int vector_dimension);
+        void vector_init_std_doubles(vector_seq &obj_std_doubles, std::vector<double> &std_vector, const int vector_dimension);
 
         //
         void vector_copy(const vector_seq &obj_initial, vector_seq &obj_to_be_copied);
