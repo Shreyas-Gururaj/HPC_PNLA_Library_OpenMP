@@ -11,190 +11,74 @@
 #include <iostream>
 #include <string>
 #include <limits> //epsilon()
-#include "vector_seq.h"
+#include "CRS_Matrix.h"
+#include "FD_linear_system.h"
 #include <cmath>
 
-using namespace std;
-
-const double initial_values = 5.0;
-
-
-/**
- * @brief Bare bone function template for testing. The beauty of templates is, that you
- *        have to write this test only once and then it should work for all of your 
- *        vector versions 
- * 
- * @tparam Vector 
- * @param dimension 
- * @param epsilon 
- * @return int 
- */
-
 //
-int test_const_elem_vector(int test_sucess_count, const int dimension, const double epsilon)
+template<typename Matrix>
+int test_Matrix_init(int test_sucess_count, const int inner_points, const double epsilon)
+{
+    Matrix CRS_init;
+    pnla::CRS_Matrix_initialization(CRS_init, 6, 10);
+    FD_Linear_System::get_crs_matrix_vectors(CRS_init.Matrix_non_zero_elements, CRS_init.Col_indices_non_zero_elements, CRS_init.Row_indices_non_zero_elements)
+    double norm_function = pnla::vector_euclidean_norm(range_norm_y);
+    double norm_target = 0.0;
+
+    for(int i = 0; i < dimension; i++)
     {
-        const double const_value = 4.0;
-
-        pnla::vector_seq obj_const_elem(dimension, initial_values);
-        obj_const_elem.vector_init_constant_elements(obj_const_elem, const_value);
-
-        for(unsigned int i =0; i < obj_const_elem.values.size(); i++)
-        {
-            if(abs(obj_const_elem.values[i] - const_value) < epsilon)
-            {
-                continue;
-            }
-            else
-            {
-                test_sucess_count += 1;
-            }
-        }
-        
-        return test_sucess_count;
+        norm_target += static_cast<double>(i * i);
     }
 
-//
+    norm_target = sqrt(norm_target);
 
-int test_range_elem_vector(int test_sucess_count, const int dimension, const double epsilon)
+    if(abs(norm_function - norm_target) > epsilon)
     {
-        pnla::vector_seq obj_range_elem(dimension, initial_values);
-        obj_range_elem.vector_init_range_elements(obj_range_elem);
-
-        for(unsigned int i =0; i < obj_range_elem.values.size(); i++)
-        {
-            if(abs(obj_range_elem.values[i] - i) < epsilon)
-            {
-                continue;
-            }
-            else
-            {
-                test_sucess_count += 1;
-            }
-        }
-        
-        return test_sucess_count;
+        std::cout << "The constant element initialization does not work as intended";
+        return test_sucess_count + 1;
     }
 
-//
-int test_std_double_vector(int test_sucess_count, const int dimension, const double epsilon)
-    {
-        pnla::vector_seq obj_std_double(dimension, initial_values);
-        obj_std_double.vector_init_std_doubles(obj_std_double);
-        std::vector<double> std_vector(obj_std_double.values.size());
+    return test_sucess_count;
+}
 
-        for(unsigned int i =0; i < obj_std_double.values.size(); i++)
-        {
-            if(abs(obj_std_double.values[i] - std_vector[i]) < epsilon)
-            {
-                continue;
-            }
-            else
-            {
-                test_sucess_count += 1;
-            }
-        }
-        
-        return test_sucess_count;
+//
+template<typename Matrix>
+int test_copy_scaled_add(int test_sucess_count, const int inner_points, const double epsilon)
+{
+    Vector range_y;
+    Vector const_z;
+    pnla::vector_init_range_elements(range_y, dimension);
+    pnla::vector_init_constant_elements(const_z, dimension, 7.5);
+    pnla::vector_copy(range_y, const_z);
+    pnla::vector_scale(const_z, 5.0);
+    pnla::vector_scaled_addition(range_y, const_z, -0.2);
+
+    double norm_function = pnla::vector_euclidean_norm(range_y);
+
+    if(abs(norm_function) > epsilon)
+    {
+        std::cout << "Either the copy_vector or the vector scaling or the scaled vector addition does not work as intended";
+        return test_sucess_count + 1;
     }
 
-//
-int test_copy_vector(int test_sucess_count, const int dimension, const double epsilon)
-    {
+    return test_sucess_count;
 
-        pnla::vector_seq obj_initial(dimension, initial_values);
-        pnla::vector_seq obj_copy(dimension, 7.5);
-        obj_copy.vector_copy(obj_initial, obj_copy);
-
-        for(unsigned int i =0; i < obj_initial.values.size(); i++)
-        {
-            if(abs(obj_copy.values[i] - obj_initial.values[i]) < epsilon)
-            {
-                continue;
-            }
-            else
-            {
-                test_sucess_count += 1;
-            }
-        }
-        
-        return test_sucess_count;
-    }
+}
 
 //
-int test_scale_vector(int test_sucess_count, const int dimension, const double epsilon)
-    {
-        const double scaling_factor = 9.6;
-        pnla::vector_seq obj_scale(dimension, initial_values);
-        pnla::vector_seq obj_target(dimension, initial_values);
-        obj_scale.vector_scale(obj_scale, scaling_factor);
-        std::vector<double> std_vector(obj_scale.values.size());
-
-        for(unsigned int i =0; i < obj_scale.values.size(); i++)
-        {
-            if(abs((obj_scale.values[i]/scaling_factor) - obj_target.values[i]) < epsilon)
-            {
-                continue;
-            }
-            else
-            {
-                test_sucess_count += 1;
-            }
-        }
-        
-        return test_sucess_count;
-    }
-
-//
-int test_eucledian_norm_vector(int test_sucess_count, const int dimension, const double epsilon)
-    {
-        pnla::vector_seq obj_norm(dimension, 1.0);
-        const double norm_target = sqrt(dimension);                                               
-        double norm_from_function = obj_norm.vector_dot_product(obj_norm, obj_norm);
-
-        if(abs((norm_target - norm_from_function) < epsilon))
-        {
-            return test_sucess_count;
-        }
-        else
-        {
-            return test_sucess_count += 1;
-        }
-    }
-
-//
-int test_scaled_addition_vector(int test_sucess_count, const int dimension, const double epsilon)
-    {
-        pnla::vector_seq obj_scaled_add_x(dimension, 0.0);
-        pnla::vector_seq obj_scaled_add_y(dimension, 0.0);                                               
-        double norm_from_function = obj_scaled_add_x.vector_dot_product(obj_scaled_add_x, obj_scaled_add_y);
-
-        if(abs((norm_from_function - 0.0) < epsilon))
-        {
-            return test_sucess_count;
-        }
-        else
-        {
-            return test_sucess_count += 1;
-        }
-    }
-
-//
-template<typename Vector>
-int test_vector_routines(const int dimension, const double epsilon)
+template<typename Matrix>     //in the template function definition "Vector" is an alias for the struct
+int test_vector_routines(const int inner_points, const double epsilon)
 {   
-    /// Here you have to implement testing routines for pnla's vector 
-    /// structures/classes. If your test fails, set test success to a non zero value;
-
     int test_sucess = 0;
-    const int test_count = 0;
-    std::cout << dimension << std::endl;
-    test_sucess += test_const_elem_vector(test_count, dimension, epsilon);
-    test_sucess += test_range_elem_vector(test_count, dimension, epsilon);
-    test_sucess += test_std_double_vector(test_count, dimension, epsilon);
-    test_sucess += test_copy_vector(test_count, dimension, epsilon);
-    test_sucess += test_scale_vector(test_count, dimension, epsilon);
-    test_sucess += test_eucledian_norm_vector(test_count, dimension, epsilon);
-    test_sucess += test_scaled_addition_vector(test_count, dimension, epsilon);
+ 
+    //
+    test_sucess += test_const_norm<Matrix>(test_sucess, dimension, epsilon);
+
+    //
+    test_sucess += test_range_norm<Vector>(test_sucess, dimension, epsilon);
+
+    //
+    test_sucess += test_copy_scaled_add<Vector>(test_sucess, dimension, epsilon);
 
     return test_sucess;
 }
@@ -208,21 +92,21 @@ int test_vector_routines(const int dimension, const double epsilon)
  */
 int main(int argc, char *argv[])
 {
-    int dim = 20;
+    int total_inner_points = 20;
 
 
  	if(argc == 2)
 	{
-         dim = std::stoi(argv[1]);
+        total_inner_points = std::stoi(argv[1]);
 	}
 
     const double epsilon(std::numeric_limits<double>::epsilon()); 
     int test_result = 0; 
 
-    std::cout<<"Test Sequential Vector"<<std::endl;
-
+    std::cout<<"Test sequential CRS_Matrix"<<std::endl;
     /// call of test_vector should look something like this
-    test_result = test_vector_routines<pnla::vector_seq>(dim, epsilon);
+    test_result = test_vector_routines<pnla::CRS_Matrix>(total_inner_points, epsilon);
+
 
     // Just for illustration of template function and to surpress warnings
     //test_result = test_vector_routines<double>(dim, epsilon);
