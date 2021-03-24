@@ -25,7 +25,7 @@ class FD_Linear_System{
 public:
 
     /// deletes default constructor 
-    FD_Linerar_System() = delete;
+    //FD_Linerar_System() = delete;
 
     /**
      * @brief Construct a new fd linear system object

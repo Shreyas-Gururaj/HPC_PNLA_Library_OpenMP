@@ -1,0 +1,30 @@
+
+# Tests need to be added as executables first
+#add_executable(test_CRS_Matrix test_CRS_Matrix.cpp ../src/vector_seq.cpp)   
+add_executable(test_CRS_Matrix test_CRS_Matrix.cpp)  
+
+# Tells where headers of target are to be foundclea
+#target_include_directories(test_CRS_Matrix PUBLIC {CMAKE_CURRENT_SOURCE_DIR} )
+target_include_directories(test_CRS_Matrix PUBLIC ../include; ../example)
+
+# Links test_CRS_Matrix against library pnla
+target_link_libraries(test_CRS_Matrix pnla)
+
+### in what follows, we create a automated testing enviroment with cmake 
+
+enable_testing()
+
+### Test vectors
+# Add a testing call of test_CRS_Matrix with no arguments
+add_test(NAME Test_CRS_Matrix_default COMMAND test_CRS_Matrix)
+
+# Add a testing call of test_CRS_Matrix with one argument (inner_points = 100)
+add_test(NAME Test_CRS_Matrix_dim_100 COMMAND test_CRS_Matrix 100)
+
+# Add a testing call of test_CRS_Matrix with one argument (inner_points = 10000)
+add_test(NAME Test_CRS_Matrix_dim_1000 COMMAND test_CRS_Matrix 1000)
+
+# Add a testing call of test_CRS_Matrix with one argument (inner_points = 10000000)
+#add_test(NAME Test_CRS_Matrix_dim_10000000 COMMAND test_CRS_Matrix 10000000)
+
+

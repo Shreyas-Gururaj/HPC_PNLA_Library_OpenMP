@@ -71,7 +71,7 @@ int test_vector_routines(const int inner_points, const double epsilon)
 {   
     int test_sucess = 0;
  
-    test_sucess += test_Matrix_init<Matrix, Vector>(test_sucess, dimension, epsilon);
+    test_sucess += test_Matrix_init<Matrix, Vector>(test_sucess, inner_points, epsilon);
 
     return test_sucess;
 }
@@ -85,7 +85,7 @@ int test_vector_routines(const int inner_points, const double epsilon)
  */
 int main(int argc, char *argv[])
 {
-    int total_inner_points = 20;
+    int total_inner_points = 10;
 
 
  	if(argc == 2)

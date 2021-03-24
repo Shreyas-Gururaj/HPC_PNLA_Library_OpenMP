@@ -36,3 +36,4 @@ target_include_directories(pnla PUBLIC include)
 # need it's own CMakeLists.txt file!
 add_subdirectory(example)
 add_subdirectory(tests)
+add_subdirectory(tests_CRS_Matrix)
