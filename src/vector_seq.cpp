@@ -55,6 +55,7 @@ namespace pnla{
     void vector_copy(const vector_seq &obj_initial, vector_seq &obj_to_be_copied)
 
     {
+        obj_to_be_copied.values.resize(obj_initial.values.size());
         for(unsigned int elem_index = 0; elem_index < obj_initial.values.size(); elem_index++)
         {
             obj_to_be_copied.values[elem_index] = obj_initial.values[elem_index];

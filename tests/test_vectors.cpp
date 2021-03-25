@@ -12,6 +12,7 @@
 #include <limits> //epsilon()
 #include "vector_seq.h"
 #include <cmath>
+#include <string>
 
 
 //

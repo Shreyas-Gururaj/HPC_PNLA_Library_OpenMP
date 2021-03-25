@@ -123,7 +123,7 @@ void FD_Linear_System::get_b(std::vector<double> &b)const
     get_x(b);
     double coefficient = 1.25 * m_h*m_h * pi*pi;
 
-    for(int i =0; i<b.size(); i++)
+    for(unsigned int i =0; i<b.size(); i++)
         b[i] *=  coefficient;
 
     //Add Boundary Condition

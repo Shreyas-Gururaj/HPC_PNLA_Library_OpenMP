@@ -52,7 +52,7 @@ int test_Matrix_init(int test_sucess_count, const int inner_points, const double
     pnla::vector_scaled_addition(y, text_x_seq, -1.0);
     const double norm_y = pnla::vector_euclidean_norm(y);
 
-    std::cout << norm_y << std::endl;
+    std::cout << "the norm is: " << norm_y << std::endl;
 
     if(abs(norm_y) > epsilon)
     {
@@ -100,6 +100,7 @@ int main(int argc, char *argv[])
     /// call of test_vector should look something like this
     test_result = test_vector_routines<pnla::CRS_Matrix, pnla::vector_seq>(total_inner_points, epsilon);
 
+    std::cout << test_result << std::endl;
     if(test_result !=0 )
         return test_result;
 
