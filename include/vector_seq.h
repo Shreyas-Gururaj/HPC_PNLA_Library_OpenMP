@@ -11,7 +11,7 @@
 
 /// Remember, every header needs it's guard !
 #ifndef __VECTOR_SEQ_H__
-#define __VECTOR_SEQ_H__S
+#define __VECTOR_SEQ_H__
 
 #include <vector>
 

@@ -1,18 +1,17 @@
 
 # Tests need to be added as executables first
-#add_executable(test_vectors test_vectors.cpp ../src/vector_seq.cpp)
-#add_executable(test_CRS_Matrix test_CRS_Matrix.cpp ../src/vector_seq.cpp)     
-add_executable(test_vectors test_vectors.cpp)   
+   
+add_executable(test_vectors test_vectors.cpp) 
 add_executable(test_CRS_Matrix test_CRS_Matrix.cpp ../example/FD_linear_system.cpp)
 
 
-# Tells where headers of target are to be foundclea
-#target_include_directories(test_vectors PUBLIC {CMAKE_CURRENT_SOURCE_DIR} )
-#target_include_directories(test_CRS_Matrix PUBLIC {CMAKE_CURRENT_SOURCE_DIR} )
+# Tells where headers of target are to be found
+
 target_include_directories(test_vectors PUBLIC ../include)
 target_include_directories(test_CRS_Matrix PUBLIC ../include; ../example)
 
 # Links test_vectors against library pnla
+
 target_link_libraries(test_vectors pnla)
 target_link_libraries(test_CRS_Matrix pnla)
 
