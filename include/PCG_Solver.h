@@ -12,7 +12,7 @@ namespace pnla{
 
 //
 template<typename Matrix, typename Vector>
-void PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x_PCG_result, const double rel_accuracy,
+int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x_PCG_result, const double rel_accuracy,
                   const unsigned int max_iterations);
 
 

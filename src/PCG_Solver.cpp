@@ -4,7 +4,7 @@ namespace pnla{
 
 
 template<typename Matrix, typename Vector>
-void PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x_PCG_result, const double rel_accuracy,
+int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x_PCG_result, const double rel_accuracy,
                   const unsigned int max_iterations)
 {
 
@@ -24,7 +24,7 @@ void PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &
     unsigned int k = 0;     //For the while loop
 
     double norm_b = vector_euclidean_norm(b_RHS_Vector);
-    const double relative_accuracy = relative_accuracy * norm_b;
+    const double relative_accuracy = rel_accuracy * norm_b;
 
     do
     {
@@ -35,15 +35,20 @@ void PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &
         vector_scaled_addition(x_PCG_result, vector_P, alpha); // X(k+1) = X(k) + alpha * P(K)
         vector_scaled_addition(residue_vector, vector_W, -alpha); // R(k+1) = R(k) - alpha * W(K)
         vector_copy(residue_vector, vector_V);                    // V(k+1) = C * R(k+1), Assuming C as identity.
-        vector_dot_product(vector_V, residue_vector);
+        rho = vector_dot_product(vector_V, residue_vector);
 
         gamma = rho / gamma;            // computes gamma(k) = rho(k+1) / rho(k)
-
-        vector_scaled_addition(vector_P, vector_V, (1.0 / gamma));
         vector_scale(vector_P, gamma);
+
+        vector_scaled_addition(vector_P, vector_V, (1.0));
+    
         k = k + 1;
 
     } while ((vector_euclidean_norm(residue_vector) > relative_accuracy) && (k <= max_iterations));
+
+    return k;
 }
 
+template int PCG_Result(const CRS_Matrix &CRS_Matrix_A, const vector_seq &b_RHS_Vector, vector_seq &x_PCG_result, const double rel_accuracy,
+                  const unsigned int max_iterations);
 }// end namespace pnla

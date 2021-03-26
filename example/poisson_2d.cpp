@@ -9,12 +9,15 @@
 
 //
 template<typename Matrix, typename Vector>
-double PCG_convergence(Vector b_pcg, Vector x_PCG_result, Vector b_RHS, Matrix A, const double epsilon)
+double PCG_convergence(Vector x_PCG_result, Vector b_RHS, Matrix A, const double epsilon)
 {
+    Vector b_pcg;
     pnla::vector_copy(b_RHS, b_pcg);
     pnla::CRS_scaled_matrix_vector_multiplication(A, x_PCG_result, b_pcg, 1.0, 0.0);
     pnla::vector_scaled_addition(b_pcg, b_RHS, -1.0);
     double norm_b_pcg = pnla::vector_euclidean_norm(b_pcg);
+    double norm_b_RHS = pnla::vector_euclidean_norm(b_RHS);
+    norm_b_pcg = norm_b_pcg / norm_b_RHS;
     
     return norm_b_pcg;
 }
@@ -29,7 +32,6 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
 
     //
     const unsigned int dimension = obj_FD_LS.get_dofs();
-    double relative_accuracy = 1e-14;
 
     //
     std::vector<double> values;
@@ -54,16 +56,18 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
     pnla::vector_init_std_doubles(b_FD, b, b_size);
 
     //
-    Matrix A;
-    pnla::CRS_Matrix_initialization(A, num_of_rows, num_non_zero, values, columns, rows);
+    Matrix A_FD;
+    pnla::CRS_Matrix_initialization(A_FD, num_of_rows, num_non_zero, values, columns, rows);
 
     //
-    pnla::PCG_Result<pnla::CRS_Matrix, pnla::vector_seq>(A, b_FD, x_FD, relative_accuracy, dimension);
+    double relative_accuracy = 1e-10;
+    int iterations = pnla::PCG_Result<pnla::CRS_Matrix, pnla::vector_seq>(A_FD, b_FD, x_FD, relative_accuracy, dimension);
 
     //
-    Vector b_pcg;
-    double norm_b = PCG_convergence<pnla::CRS_Matrix, pnla::vector_seq>(b_pcg, x_FD, b_FD, A, epsilon);
-    //std::cout << "The norm of b is :  " << norm_b << std::endl;
+    double norm_b = PCG_convergence<pnla::CRS_Matrix, pnla::vector_seq>(x_FD, b_FD, A_FD, epsilon);
+    
+    std::cout << "The norm of b is :    " << norm_b << std::endl;
+    std::cout << "Number of iterations taken to converge is :    " << iterations << std::endl;
 
     if(abs(norm_b) > epsilon)
     {

@@ -15,7 +15,7 @@ target_link_libraries(dev pnla)
 
 # Tests need to be added as executables first
     
-add_executable(test_poisson_2d poisson_2d.cpp FD_linear_system.cpp ../src/vector_seq.cpp ../src/CRS_Matrix.cpp ../src/PCG_Solver.cpp)
+add_executable(test_poisson_2d poisson_2d.cpp FD_linear_system.cpp)
 
 # Tells where headers of target are to be found
 #target_include_directories(test_poisson_2d {CMAKE_CURRENT_SOURCE_DIR})
