@@ -1,9 +1,9 @@
 /**
  * @file vector_seq.cpp
- * @author your name (you@domain.com)
- * @brief 
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
+ * @brief Implementation of all the routines for sequential vectors.
  * @version 0.1
- * @date 2021-03-23
+ * @date 2021-03-28
  * 
  * @copyright Copyright (c) 2021
  * 
@@ -15,13 +15,12 @@
 namespace pnla{
 
 
-    /// Here is the place for the actual implementation of your sequential
-    /// vector routines
+    /// The actual implementation of your sequential vector routines
 
-    //
     void vector_init_constant_elements(vector_seq &obj_const_elem, const int vector_dimension, const double constant_value)
 
     {
+        ///resize vector
         obj_const_elem.values.resize(vector_dimension);
         for(unsigned int elem_index = 0; elem_index < obj_const_elem.values.size(); elem_index++)
         {
@@ -29,9 +28,9 @@ namespace pnla{
         }
     }
 
-    //
     void vector_init_range_elements(vector_seq &obj_range_elem, const int vector_dimension)
     {
+        ///resize vector
         obj_range_elem.values.resize(vector_dimension);
         for(unsigned int elem_index = 0; elem_index < obj_range_elem.values.size(); elem_index++)
         {
@@ -39,9 +38,9 @@ namespace pnla{
         }
     }
 
-    //
     void vector_init_std_doubles(vector_seq &obj_std_doubles, std::vector<double> &std_vector, const int vector_dimension)
     {
+        ///resize vector
         obj_std_doubles.values.resize(vector_dimension);
         std_vector.resize(obj_std_doubles.values.size());
         for(unsigned int elem_index = 0; elem_index < obj_std_doubles.values.size(); elem_index++)
@@ -51,10 +50,10 @@ namespace pnla{
 
     }
 
-    //
     void vector_copy(const vector_seq &obj_initial, vector_seq &obj_to_be_copied)
 
     {
+        ///resize vector
         obj_to_be_copied.values.resize(obj_initial.values.size());
         for(unsigned int elem_index = 0; elem_index < obj_initial.values.size(); elem_index++)
         {
@@ -62,7 +61,6 @@ namespace pnla{
         }
     }
 
-    //
     void vector_scale(vector_seq &obj_scale, const double scaling_factor)
     {
         for(unsigned int elem_index = 0; elem_index < obj_scale.values.size(); elem_index++)
@@ -71,7 +69,6 @@ namespace pnla{
         }
     }
 
-    //
     double vector_dot_product(const vector_seq &obj_dot_x, const vector_seq &obj_dot_y)
     {
         double result_dot_prod = 0.0;
@@ -84,7 +81,6 @@ namespace pnla{
         return result_dot_prod;
     }
 
-    //
     double vector_euclidean_norm(const vector_seq &obj_norm_x)
     {
         double result_euclidean_norm = sqrt(vector_dot_product(obj_norm_x, obj_norm_x));
@@ -92,7 +88,6 @@ namespace pnla{
 
     }
    
-   //
    void vector_scaled_addition(vector_seq &obj_scaled_add_y, const vector_seq &obj_scaled_add_x, const double scaling_factor_add)
    {
       for(unsigned int elem_index = 0; elem_index < obj_scaled_add_x.values.size(); elem_index++)

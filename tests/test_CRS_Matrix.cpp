@@ -1,13 +1,14 @@
 /**
- * @file test_vectors.cpp
- * @author Thomas Rau (thomas1.rau@uni-bayreuth.de)
- * @brief Bare bone structure of a small unit test for your vector routines
+ * @file test_CRS_Matrix.cpp
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
+ * @brief 
  * @version 0.1
- * @date 2021-03-14
+ * @date 2021-03-28
  * 
  * @copyright Copyright (c) 2021
  * 
  */
+
 #include <iostream>
 #include <string>
 #include <limits> //epsilon()
@@ -15,38 +16,50 @@
 #include "FD_linear_system.h"
 #include <cmath>
 
-//
+/**
+ * @brief Checks for the correctness of the functions "CRS_Matrix_initialization" and 
+ *        "CRS_scaled_matrix_vector_multiplication" simultaneously.
+ * 
+ * @tparam Matrix Matrix Template argument which can be instantiated with classes having the same charecteristics of struct "CRS_Matrix".
+ * @tparam Vector Vector Template argument which can be instantiated with classes having the same charecteristics of struct "vector_seq".
+ * @param test_sucess_count initialized with 0.
+ * @param inner_points Given as an argument to determine the FD_Linear system A, X and B.
+ * @param epsilon tolerable error in computation.
+ * @return int Returns either 0 or 1.
+ * 
+ */
 template<typename Matrix, typename Vector>
 int test_Matrix_init(int test_sucess_count, const int inner_points, const double epsilon)
 {
+    // Computes the step size required to initialize CRS_Matrix obtained from FD_linear_system.
     const double h = 1/static_cast<double>(inner_points + 1);
     FD_Linear_System obj_FD_LS(inner_points, h);
 
-    //
+    // To get CRS Matrix from the FD_linear_system.
     std::vector<double> values;
     std::vector<int> columns;
     std::vector<int> rows;
     obj_FD_LS.get_crs_matrix_vectors(values, columns, rows);
 
-    //
+    // To get the test vector X containing the row sum of A * X(1).
     std::vector<double> test_x;
     obj_FD_LS.get_test_vector(test_x);
     const int test_x_size = test_x.size();
 
-    //
+    // Storing the values obtained from the FD_linear system in the CRS_Matrix.
     const unsigned int num_of_rows = (rows.size());
     const unsigned int num_non_zero = (values.size());
-    Matrix CRS_to_store;
-    pnla::CRS_Matrix_initialization(CRS_to_store, num_of_rows, num_non_zero, values, columns, rows);
+    Matrix CRS_matrix_A;
+    pnla::CRS_Matrix_initialization(CRS_matrix_A, num_of_rows, num_non_zero, values, columns, rows);
 
-    //
+    // To create two vectors and carry out scaled matrix vector multiplication. Vector X has all 1's and Vector Y is a 0 vector.
     Vector x;
     Vector y;
     pnla::vector_init_constant_elements(x, num_of_rows, 1.0);
     pnla::vector_init_constant_elements(y, num_of_rows, 0.0);
-    pnla::CRS_scaled_matrix_vector_multiplication(CRS_to_store, x, y, 1.0,  1.0);
+    pnla::CRS_scaled_matrix_vector_multiplication(CRS_matrix_A, x, y, 1.0,  1.0);
 
-    //
+    // Comparing the result with the test vector x.
     Vector text_x_seq;
     pnla::vector_init_std_doubles(text_x_seq, test_x, test_x_size);
     pnla::vector_scaled_addition(y, text_x_seq, -1.0);
@@ -63,9 +76,15 @@ int test_Matrix_init(int test_sucess_count, const int inner_points, const double
     return test_sucess_count;
 }
 
-//
-
-//
+/**
+ * @brief Appends the value of the test_sucess initialized with 0 by a positive integer if any of the test fails.
+ * 
+ * @tparam Matrix Matrix Template argument which can be instantiated with classes having the same charecteristics of struct "CRS_Matrix".
+ * @tparam Vector Vector Template argument which can be instantiated with classes having the same charecteristics of struct "vector_seq".
+ * @param inner_points Given as an argument to determine the FD_Linear system A, X and B.
+ * @param epsilon tolerable error in computation.
+ * @return int int Returns either 0 or a positive integer.
+ */
 template<typename Matrix, typename Vector>     //in the template function definition "Vector" is an alias for the struct
 int test_vector_routines(const int inner_points, const double epsilon)
 {   
@@ -77,11 +96,11 @@ int test_vector_routines(const int inner_points, const double epsilon)
 }
 
 /**
- * @brief Test Programm for pnla's vector structs/classes
+ * @brief Test Programm for pnla's CRS_Matrix structs/classes.
  * 
- * @param argc Number of arguments  
- * @param argv Programm argument list
- * @return int On sucess = 0, if return value != 0 some test failed
+ * @param argc Number of arguments.
+ * @param argv Programm argument list.
+ * @return int On sucess = 0, if return value != 0 some test failed.
  */
 int main(int argc, char *argv[])
 {

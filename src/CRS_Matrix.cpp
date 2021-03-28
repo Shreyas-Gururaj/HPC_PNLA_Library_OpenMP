@@ -1,25 +1,26 @@
 /**
  * @file CRS_Matrix.cpp
- * @author your name (you@domain.com)
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
  * @brief 
  * @version 0.1
- * @date 2021-03-25
+ * @date 2021-03-28
  * 
  * @copyright Copyright (c) 2021
  * 
  */
+
 #include "CRS_Matrix.h"
 #include <cmath>
 
 namespace pnla{
 
-    //
      void CRS_Matrix_initialization(CRS_Matrix &obj_CRS_init, const unsigned int num_of_rows, const unsigned int num_non_zero_entries, 
                                     const std::vector<double> &values, const std::vector<int> &col_index, const std::vector<int> &row_index)
     {
         obj_CRS_init.total_non_zero_elements = num_non_zero_entries;
         obj_CRS_init.total_num_of_rows = num_of_rows;
 
+        /////resize vectors
         obj_CRS_init.Matrix_non_zero_elements.resize(num_non_zero_entries);
         obj_CRS_init.Col_indices_non_zero_elements.resize(num_non_zero_entries);
         obj_CRS_init.Row_indices_non_zero_elements.resize(num_of_rows);
@@ -41,7 +42,6 @@ namespace pnla{
 
     }
 
-    //
     void CRS_scaled_matrix_vector_multiplication(const CRS_Matrix &obj_CRS_Matrix, const vector_seq &x, 
                                                  vector_seq &y, const double alpha, const double beta)
     {
