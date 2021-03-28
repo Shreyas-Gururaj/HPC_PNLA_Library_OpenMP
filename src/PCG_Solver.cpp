@@ -21,16 +21,15 @@ int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x
 
     Vector residue_vector;
     vector_copy(b_RHS_Vector, residue_vector);               // initiates the residue_vector, r_0 with the RHS b_RHS_Vector.
-    CRS_scaled_matrix_vector_multiplication(CRS_Matrix_A, x_PCG_result, residue_vector, -1.0, 1.0);   // computes r_0 = r_0 - A * x.
 
     Vector vector_P , vector_V, vector_W;     //As required in the algorithm.
 
-    vector_copy(residue_vector, vector_P);   //Assuming conditioner is an identity matrix.
-    vector_copy(residue_vector, vector_V);    //Assuming conditioner is an identity matrix.
-    vector_copy(residue_vector, vector_W);
+    vector_copy(b_RHS_Vector, vector_P);   //Assuming conditioner is an identity matrix.
+    vector_copy(b_RHS_Vector, vector_V);    //Assuming conditioner is an identity matrix.
+    vector_init_constant_elements(vector_W, b_RHS_Vector.values.size(), 0.0);
 
     double rho = vector_dot_product(vector_V, residue_vector);
-    double gamma = rho;     //required for further computations as rho(k) cannot be stored on the run otherwise.
+    double gamma = 0.0;     //required for further computations as rho(k) cannot be stored on the run otherwise.
     double alpha = 0.0;
     unsigned int k = 0;     //For the while loop.
 
@@ -46,13 +45,13 @@ int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x
         vector_scaled_addition(x_PCG_result, vector_P, alpha); // computes X(k+1) = X(k) + alpha * P(K).
         vector_scaled_addition(residue_vector, vector_W, -alpha); // computes R(k+1) = R(k) - alpha * W(K).
         vector_copy(residue_vector, vector_V);                    // computes V(k+1) = C * R(k+1), Assuming C as identity.
+
+        gamma = rho;
         rho = vector_dot_product(vector_V, residue_vector);       //computes ρ(k+1) = (V(k+1), R(k+1)).
-
         gamma = rho / gamma;            // computes γk = ρ(k+1) / ρ(k).
+
         vector_scale(vector_P, gamma);  // Pre-computation for computing P(k+1) = V(k+1) + γ(k) * P(k).
-
-
-        vector_scaled_addition(vector_P, vector_V, (1.0)); // computes P(k+1) = V(k+1) + γ(k) * P(k).
+        vector_scaled_addition(vector_P, vector_V, 1.0); // computes P(k+1) = V(k+1) + γ(k) * P(k).
     
         k = k + 1;
 

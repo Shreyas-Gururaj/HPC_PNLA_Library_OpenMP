@@ -35,13 +35,13 @@ add_test(NAME test_poisson_2d_default COMMAND test_poisson_2d)
 add_test(NAME test_poisson_2d_inner_100 COMMAND test_poisson_2d 100)
 
 # # Add a testing call of test_poisson_2d with one argument (inner points = 200)
-# add_test(NAME test_poisson_2d_inner_200 COMMAND test_poisson_2d 200)
+add_test(NAME test_poisson_2d_inner_200 COMMAND test_poisson_2d 200)
 
 # # Add a testing call of test_poisson_2d with one argument (inner points = 400)
-# add_test(NAME test_poisson_2d_inner_400 COMMAND test_poisson_2d 400)
+add_test(NAME test_poisson_2d_inner_400 COMMAND test_poisson_2d 400)
 
 # # Add a testing call of test_poisson_2d with one argument (inner points = 800)
-# add_test(NAME test_poisson_2d_inner_800 COMMAND test_poisson_2d 800)
+add_test(NAME test_poisson_2d_inner_800 COMMAND test_poisson_2d 800)
 
 # # Add a testing call of test_poisson_2d with one argument (inner points = 1600)
-# add_test(NAME test_poisson_2d_inner_1600 COMMAND test_poisson_2d 1600)
+add_test(NAME test_poisson_2d_inner_1600 COMMAND test_poisson_2d 1600)
