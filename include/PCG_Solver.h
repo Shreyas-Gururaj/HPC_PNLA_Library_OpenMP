@@ -13,8 +13,6 @@
 #define __PCG_Solver_H__
 
 #include <vector>
-#include "vector_seq.h"
-#include "CRS_Matrix.h"
 
 
 

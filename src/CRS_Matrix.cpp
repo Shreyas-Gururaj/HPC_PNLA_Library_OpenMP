@@ -45,6 +45,7 @@ namespace pnla{
     void CRS_scaled_matrix_vector_multiplication(const CRS_Matrix &obj_CRS_Matrix, const vector_seq &x, 
                                                  vector_seq &y, const double alpha, const double beta)
     {
+
         for(unsigned int i = 0; i < obj_CRS_Matrix.Row_indices_non_zero_elements.size() - 1; i++)
         {
             y.values[i] *= beta;
@@ -53,8 +54,7 @@ namespace pnla{
                 { 
                     y.values[i] += alpha * obj_CRS_Matrix.Matrix_non_zero_elements[k] * x.values[obj_CRS_Matrix.Col_indices_non_zero_elements[k]];
                 }
-            
         }
-       
+
     }
 }// end namespace pnla

@@ -11,8 +11,10 @@
 #include <iostream>
 #include <limits> //epsilon()
 #include "vector_seq.h"
+#include "vector_omp.h"
 #include <cmath>
 #include <string>
+#include <omp.h>
 
 
 /**
@@ -148,17 +150,30 @@ int main(int argc, char *argv[])
 
  	if(argc == 2)
 	{
-         dim = std::stoi(argv[1]);
+        dim = std::stoi(argv[1]);
 	}
 
+    int nr_of_threads = 1;
+
+    if(argc == 2)
+	{
+        nr_of_threads = std::stoi(argv[2]);
+	}
+    omp_set_num_threads(nr_of_threads);
+
     const double epsilon(std::numeric_limits<double>::epsilon()); 
-    int test_result = 0; 
+    int test_result = 0;
 
 
     std::cout<<"Test Sequential Vector"<<std::endl;
 
     // instantiating the template function with the struct "vector_seq".
     test_result = test_vector_routines<pnla::vector_seq>(dim, epsilon);
+
+    std::cout<<"Test OMP Vector"<<std::endl;
+
+    // instantiating the template function with the struct "vector_seq".
+    test_result = test_vector_routines<pnla::vector_omp>(dim, epsilon);
 
     if(test_result !=0 )
         return test_result;

@@ -10,6 +10,9 @@
  */
 
 #include "PCG_Solver.h"
+#include "vector_seq.h"
+#include "CRS_Matrix.h"
+#include <iostream>
 
 namespace pnla{
 
@@ -57,7 +60,7 @@ int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x
 
     } while ((vector_euclidean_norm(residue_vector) > relative_accuracy) && (k <= max_iterations));
       // While loop exits if either required relative accuracy is achieved or the number of iterations reaches max_iterations.
-
+    //std::cout << vector_euclidean_norm(residue_vector) << std::endl;
     return k;  // Returns the number of iterations required to reach the specified relative accuracy.
 }
 

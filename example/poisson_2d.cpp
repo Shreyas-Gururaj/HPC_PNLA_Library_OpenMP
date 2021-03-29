@@ -6,6 +6,7 @@
 #include "PCG_Solver.h"
 #include <limits> //epsilon()
 #include <cmath>
+#include<chrono>
 
 /**
  * @brief Checks the convergence of the PCG towards the actual X.
@@ -22,22 +23,55 @@
 template<typename Matrix, typename Vector>
 double PCG_convergence(Vector x_PCG_result, Vector b_RHS, Matrix A, const double epsilon)
 {
-    // Create a new vector b_pcg and initialize with b_RHS.
+    //Create a new vector b_pcg and initialize with b_RHS.
     Vector b_pcg;
     pnla::vector_copy(b_RHS, b_pcg);
 
-    // Computes A * X and stores in b_pcg. X is the result obtained from the PCG_Solver.
-    pnla::CRS_scaled_matrix_vector_multiplication(A, x_PCG_result, b_pcg, 1.0, 0.0);
+    //////
+    // std::vector<double> value = {3,4,7,4,9,2,-5,3,8,-1};
+    // std::vector<int> column = {1,2,5,4,1,2,3,2,4,5};
+    // std::vector<int> row = {0,3,4,7,9,10};
+    // Matrix A1;
+    // unsigned int nz = value.size();
+    // unsigned int nr = row.size();
+    // pnla::CRS_Matrix_initialization(A1, nr, nz, value, column, row);
+    // std::cout << "CRS initialized" << std::endl;
+    // for(unsigned int i = 0; i < nr; i++)
+    // {
+    //     std::cout << A1.Row_indices_non_zero_elements[i] << std::endl;
+    // }
+    // Vector x1, y1;
+    // pnla::vector_init_constant_elements(x1, 7, 1.0);
+    // std::vector<double> y1_std = {14, 4, 6, 11, -1};
+    // pnla::vector_init_std_doubles(y1, y1_std, y1_std.size());
 
-    // Computes the residue and compare with the given b_RHS.
-    pnla::vector_scaled_addition(b_pcg, b_RHS, -1.0);
-    double norm_b_pcg = pnla::vector_euclidean_norm(b_pcg);
-
-    // Check for absolute accuracy.
-    double norm_b_RHS = pnla::vector_euclidean_norm(b_RHS);
-    norm_b_pcg = norm_b_pcg / norm_b_RHS;
+    // pnla::CRS_scaled_matrix_vector_multiplication(A1, x1, y1, 1.0, -1.0);
+    // std::cout << "scaled worked" << std::endl;
     
-    return norm_b_pcg;
+
+    // for(unsigned int i = 0; i < nr; i++)
+    // {
+    //     std::cout << y1.values[i] << std::endl;
+    // }
+
+    // std::cout << "The y1 norm is :   " << pnla::vector_euclidean_norm(y1) << std::endl;
+
+    // return 0;
+    //////////////
+
+
+    // Computes A * X and stores in b_pcg. X is the result obtained from the PCG_Solver.
+    pnla::CRS_scaled_matrix_vector_multiplication(A, x_PCG_result, b_pcg, 1.0, -1.0);
+
+    //Computes the residue and compare with the given b_RHS.
+    double norm_b_pcg = pnla::vector_euclidean_norm(b_pcg);
+    double norm_b_RHS = pnla::vector_euclidean_norm(b_RHS);
+    double norm_residue = norm_b_pcg - norm_b_RHS;
+    //Check for absolute accuracy.
+    norm_residue = (norm_residue / norm_b_RHS);
+    std::cout << "the norm of b_residue is :   " << norm_residue << std::endl;
+    
+    return norm_residue;
 }
 
 /**
@@ -88,13 +122,20 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
     pnla::CRS_Matrix_initialization(A_FD, num_of_rows, num_non_zero, values, columns, rows);
 
     // PCG solver called.
-    double relative_accuracy = 1e-10;
-    int iterations = pnla::PCG_Result<pnla::CRS_Matrix, pnla::vector_seq>(A_FD, b_FD, x_FD, relative_accuracy, dimension);
+    double relative_accuracy = 1e-10;   
 
-    // Check for convergence and the number of iterations taken to converge.
-    double norm_b = PCG_convergence<pnla::CRS_Matrix, pnla::vector_seq>(x_FD, b_FD, A_FD, epsilon);
-    
-    std::cout << "The norm of b is :    " << norm_b << std::endl;
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    int iterations = pnla::PCG_Result<Matrix, Vector>(A_FD, b_FD, x_FD, relative_accuracy, dimension);
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds is :  " << run_time.count() << std::endl;
+
+    //Check for convergence and the number of iterations taken to converge.
+    double norm_b = PCG_convergence<Matrix, Vector>(x_FD, b_FD, A_FD, epsilon);
+
+    //std::cout << "The norm of b is :    " << norm_b << std::endl;
     std::cout << "Number of iterations taken to converge is :    " << iterations << std::endl;
 
     if(abs(norm_b) > epsilon)
@@ -103,7 +144,7 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
         return test_sucess_count + 1;
     }
 
-    return test_sucess_count;
+     return test_sucess_count;
 
 }
 
@@ -133,6 +174,5 @@ int main(int argc, char *argv[])
         return test_result;
 
     return test_result;
-    return 0;
 }
 
