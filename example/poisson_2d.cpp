@@ -36,7 +36,7 @@ double PCG_convergence(Vector x_PCG_result, Vector b_RHS, Matrix A, const double
     // unsigned int nr = row.size();
     // pnla::CRS_Matrix_initialization(A1, nr, nz, value, column, row);
     // std::cout << "CRS initialized" << std::endl;
-    // for(unsigned int i = 0; i < nr; i++)
+    // for(unsigned int i = 0; i < nr -1; i++)
     // {
     //     std::cout << A1.Row_indices_non_zero_elements[i] << std::endl;
     // }
@@ -49,7 +49,7 @@ double PCG_convergence(Vector x_PCG_result, Vector b_RHS, Matrix A, const double
     // std::cout << "scaled worked" << std::endl;
     
 
-    // for(unsigned int i = 0; i < nr; i++)
+    // for(unsigned int i = 0; i < nr -1; i++)
     // {
     //     std::cout << y1.values[i] << std::endl;
     // }

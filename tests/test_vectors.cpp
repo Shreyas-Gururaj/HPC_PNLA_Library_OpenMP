@@ -15,6 +15,7 @@
 #include <cmath>
 #include <string>
 #include <omp.h>
+#include<chrono>
 
 
 /**
@@ -31,8 +32,20 @@ template<typename Vector>
 int test_const_norm(int test_sucess_count, const int dimension, const double epsilon)
 {
     Vector const_x;
+
+    auto start_time = std::chrono::high_resolution_clock::now();
     pnla::vector_init_constant_elements(const_x, dimension, 1.0);
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for vector_init_constant_elements is :  " << run_time.count() << std::endl;
+
+    start_time = std::chrono::high_resolution_clock::now();
     double norm_function = pnla::vector_euclidean_norm(const_x);
+    end_time = std::chrono::high_resolution_clock::now();
+    run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for vector_euclidean_norm is :  " << run_time.count() << std::endl;
+
+
     double norm_target = sqrt(dimension);   // Norm of vectors of all elemnts = 1.0 is nothing but the sqrt(dimension of the vector).
 
     if(abs(norm_function - norm_target) > epsilon)
@@ -59,7 +72,13 @@ template<typename Vector>
 int test_range_norm(int test_sucess_count, const int dimension, const double epsilon)
 {
     Vector range_y;
+
+    auto start_time = std::chrono::high_resolution_clock::now();
     pnla::vector_init_range_elements(range_y, dimension);
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for vector_init_range_elements is :  " << run_time.count() << std::endl;
+
     double norm_function = pnla::vector_euclidean_norm(range_y);
     double norm_target = 0.0;
 
@@ -79,6 +98,7 @@ int test_range_norm(int test_sucess_count, const int dimension, const double eps
     return test_sucess_count;
 }
 
+
 /**
  * @brief Checks the correctness of the functions "vector_copy", "vector_scale" and "vector_scaled_addition" simultaneously.
  * 
@@ -96,9 +116,24 @@ int test_copy_scaled_add(int test_sucess_count, const int dimension, const doubl
     Vector const_z;
     pnla::vector_init_range_elements(range_y, dimension);
     pnla::vector_init_constant_elements(const_z, dimension, 7.5);
+
+    auto start_time = std::chrono::high_resolution_clock::now();
     pnla::vector_copy(range_y, const_z);
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for vector_copy is :  " << run_time.count() << std::endl;
+
+    start_time = std::chrono::high_resolution_clock::now();
     pnla::vector_scale(const_z, 5.0);         // Scaling by a factor α
-    pnla::vector_scaled_addition(range_y, const_z, -0.2);  // Rescaling by a factor 0f -(1/α) and adding with the vector before scaling
+    end_time = std::chrono::high_resolution_clock::now();
+    run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for vector_scale is :  " << run_time.count() << std::endl;
+
+    start_time = std::chrono::high_resolution_clock::now();
+    pnla::vector_scaled_addition(range_y, const_z, -0.2);  // Rescaling by a factor 0f -(1/α) and adding with the vector before scaling.
+    end_time = std::chrono::high_resolution_clock::now();
+    run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for vector_scaled_addition is :  " << run_time.count() << std::endl;
 
     double norm_function = pnla::vector_euclidean_norm(range_y);
 
@@ -125,12 +160,17 @@ template<typename Vector>
 int test_vector_routines(const int dimension, const double epsilon)
 {   
     int test_sucess = 0;
- 
+
+    auto start_time = std::chrono::high_resolution_clock::now();
     test_sucess += test_const_norm<Vector>(test_sucess, dimension, epsilon);
 
     test_sucess += test_range_norm<Vector>(test_sucess, dimension, epsilon);
 
     test_sucess += test_copy_scaled_add<Vector>(test_sucess, dimension, epsilon);
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Total time in milliseconds is :  " << run_time.count() << std::endl;
 
     return test_sucess;
 }
@@ -153,13 +193,13 @@ int main(int argc, char *argv[])
         dim = std::stoi(argv[1]);
 	}
 
-    int nr_of_threads = 1;
-
-    if(argc == 2)
+    if(argc == 3)
 	{
-        nr_of_threads = std::stoi(argv[2]);
+        dim = std::stoi(argv[1]);
+        const int nr_of_threads = std::stoi(argv[2]);
+        omp_set_num_threads(nr_of_threads);
 	}
-    omp_set_num_threads(nr_of_threads);
+    //int nr_of_threads = 1;
 
     const double epsilon(std::numeric_limits<double>::epsilon()); 
     int test_result = 0;

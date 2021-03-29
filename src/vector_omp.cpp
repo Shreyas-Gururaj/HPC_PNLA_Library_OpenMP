@@ -1,7 +1,7 @@
 /**
  * @file vector_seq.cpp
  * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
- * @brief Implementation of all the routines for sequential vectors.
+ * @brief Implementation of all the routines for omp vectors.
  * @version 0.1
  * @date 2021-03-28
  * 
@@ -16,7 +16,7 @@
 namespace pnla{
 
 
-    /// The actual implementation of your sequential vector routines
+    /// The actual implementation of your omp vector routines
 
     void vector_init_constant_elements(vector_omp &obj_const_elem, const int vector_dimension, const double constant_value)
 
@@ -79,7 +79,7 @@ namespace pnla{
     {
         double result_dot_prod = 0.0;
 
-        #pragma omp parallel for reduction(+:result_dot_prod)
+        #pragma omp parallel for shared(obj_dot_x, obj_dot_y) reduction(+:result_dot_prod)
         for(unsigned int elem_index = 0; elem_index < obj_dot_x.values.size(); elem_index++)
             {
                 result_dot_prod += obj_dot_x.values[elem_index] * obj_dot_y.values[elem_index];
@@ -97,6 +97,7 @@ namespace pnla{
    
    void vector_scaled_addition(vector_omp &obj_scaled_add_y, const vector_omp &obj_scaled_add_x, const double scaling_factor_add)
    {
+      #pragma omp parallel for shared(obj_scaled_add_y, obj_scaled_add_x) schedule(static)
       for(unsigned int elem_index = 0; elem_index < obj_scaled_add_x.values.size(); elem_index++)
            {
                obj_scaled_add_y.values[elem_index] = obj_scaled_add_y.values[elem_index] + scaling_factor_add * obj_scaled_add_x.values[elem_index];
