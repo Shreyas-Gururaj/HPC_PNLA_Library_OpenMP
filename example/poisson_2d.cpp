@@ -56,22 +56,20 @@ double PCG_convergence(Vector x_PCG_result, Vector b_RHS, Matrix A, const double
 
     // std::cout << "The y1 norm is :   " << pnla::vector_euclidean_norm(y1) << std::endl;
 
-    // return 0;
+    // return 0;    
     //////////////
 
 
     // Computes A * X and stores in b_pcg. X is the result obtained from the PCG_Solver.
-    pnla::CRS_scaled_matrix_vector_multiplication(A, x_PCG_result, b_pcg, 1.0, -1.0);
+    pnla::CRS_scaled_matrix_vector_multiplication(A, x_PCG_result, b_pcg, -1.0, 1.0);
 
     //Computes the residue and compare with the given b_RHS.
     double norm_b_pcg = pnla::vector_euclidean_norm(b_pcg);
     double norm_b_RHS = pnla::vector_euclidean_norm(b_RHS);
-    double norm_residue = norm_b_pcg - norm_b_RHS;
-    //Check for absolute accuracy.
-    norm_residue = (norm_residue / norm_b_RHS);
-    std::cout << "the norm of b_residue is :   " << norm_residue << std::endl;
     
-    return norm_residue;
+    norm_b_pcg = (norm_b_pcg / norm_b_RHS);
+    std::cout << "the norm of b_residue is :   " << norm_b_pcg << std::endl;
+    return norm_b_pcg;
 }
 
 /**
@@ -122,7 +120,7 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
     pnla::CRS_Matrix_initialization(A_FD, num_of_rows, num_non_zero, values, columns, rows);
 
     // PCG solver called.
-    double relative_accuracy = 1e-10;   
+    double relative_accuracy = 1e-16;   
 
     auto start_time = std::chrono::high_resolution_clock::now();
 

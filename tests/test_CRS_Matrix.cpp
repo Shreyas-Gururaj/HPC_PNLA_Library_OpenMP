@@ -13,8 +13,11 @@
 #include <string>
 #include <limits> //epsilon()
 #include "CRS_Matrix.h"
+#include "CRS_Matrix_omp.h"
 #include "FD_linear_system.h"
 #include <cmath>
+#include <omp.h>
+#include<chrono>
 
 /**
  * @brief Checks for the correctness of the functions "CRS_Matrix_initialization" and 
@@ -50,14 +53,28 @@ int test_Matrix_init(int test_sucess_count, const int inner_points, const double
     const unsigned int num_of_rows = (rows.size());
     const unsigned int num_non_zero = (values.size());
     Matrix CRS_matrix_A;
+    CRS_matrix_A.total_num_of_rows = num_of_rows;
+    CRS_matrix_A.total_non_zero_elements = num_non_zero;
+
+    auto start_time = std::chrono::high_resolution_clock::now();
     pnla::CRS_Matrix_initialization(CRS_matrix_A, num_of_rows, num_non_zero, values, columns, rows);
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for CRS_Matrix_initialization is :  " << run_time.count() << std::endl;
 
     // To create two vectors and carry out scaled matrix vector multiplication. Vector X has all 1's and Vector Y is a 0 vector.
     Vector x;
     Vector y;
+    x.vector_dimension = num_of_rows;
+    y.vector_dimension = num_of_rows;
     pnla::vector_init_constant_elements(x, num_of_rows, 1.0);
     pnla::vector_init_constant_elements(y, num_of_rows, 0.0);
+
+    start_time = std::chrono::high_resolution_clock::now();
     pnla::CRS_scaled_matrix_vector_multiplication(CRS_matrix_A, x, y, 1.0,  1.0);
+    end_time = std::chrono::high_resolution_clock::now();
+    run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Time in milliseconds for CRS_scaled_matrix_vector_multiplication is :  " << run_time.count() << std::endl;
 
     // Comparing the result with the test vector x.
     Vector text_x_seq;
@@ -89,8 +106,12 @@ template<typename Matrix, typename Vector>     //in the template function defini
 int test_vector_routines(const int inner_points, const double epsilon)
 {   
     int test_sucess = 0;
- 
+    
+    auto start_time = std::chrono::high_resolution_clock::now();
     test_sucess += test_Matrix_init<Matrix, Vector>(test_sucess, inner_points, epsilon);
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Total time in milliseconds is :  " << run_time.count() << std::endl;
 
     return test_sucess;
 }
@@ -112,12 +133,24 @@ int main(int argc, char *argv[])
         total_inner_points = std::stoi(argv[1]);
 	}
 
+    if(argc == 3)
+	{
+        total_inner_points = std::stoi(argv[1]);
+        const int nr_of_threads = std::stoi(argv[2]);
+        omp_set_num_threads(nr_of_threads);
+	}
+
     const double epsilon(std::numeric_limits<double>::epsilon()); 
     int test_result = 0; 
 
     std::cout<<"Test sequential CRS_Matrix"<<std::endl;
-    /// call of test_vector should look something like this
+    // instantiating the template function with the struct "CRS_Matrix" and "vector_seq".
     test_result = test_vector_routines<pnla::CRS_Matrix, pnla::vector_seq>(total_inner_points, epsilon);
+
+    std::cout<<"Test OMP CRS_Matrix"<<std::endl;
+    // instantiating the template function with the struct "CRS_Matrix_omp" and "vector_omp".
+    test_result = test_vector_routines<pnla::CRS_Matrix_omp, pnla::vector_omp>(total_inner_points, epsilon);
+
 
     std::cout << test_result << std::endl;
     if(test_result !=0 )

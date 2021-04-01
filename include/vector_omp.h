@@ -14,6 +14,8 @@
 #define __VECTOR_OMP_H__
 
 #include <vector>
+#include <memory>
+#include<utility>
 
 /// put everything of the PNLA-library into the suitable namespace.
 
@@ -33,7 +35,9 @@ namespace pnla{
         unsigned int vector_dimension;
 
         //Std vector of doubles to store the elemnts in the vector of given dimension.
-        std::vector<double> values; 
+        //std::vector<double> values;
+        //std::unique_ptr<double[]> values;
+        std::unique_ptr<double[]> values;
 
     };
 
@@ -113,6 +117,15 @@ namespace pnla{
          * @param scaling_factor_add Scaling factor α.
          */
         void vector_scaled_addition(vector_omp &obj_scaled_add_y, const vector_omp &obj_scaled_add_x, const double scaling_factor_add);
+
+        /**
+         * @brief Allocates the memory for the vector created using unique pointer.
+         * 
+         * @param unique Arbitrary instance of the struct.
+         * @param dim The required dimension of the initialized vector.
+         * 
+         */
+        void allocate(vector_omp &unique, const unsigned int dim);
 
 
 
