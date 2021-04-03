@@ -21,9 +21,6 @@ namespace pnla{
     void vector_init_constant_elements(vector_omp &obj_const_elem, const int vector_dimension, const double constant_value)
 
     {
-        ///resize vector
-        //obj_const_elem.values.resize(vector_dimension);
-
         allocate(obj_const_elem, vector_dimension);
         #pragma omp parallel for schedule(static)
         for(unsigned int elem_index = 0; elem_index < obj_const_elem.vector_dimension; elem_index++)
@@ -34,9 +31,6 @@ namespace pnla{
 
     void vector_init_range_elements(vector_omp &obj_range_elem, const int vector_dimension)
     {
-        ///resize vector
-        //obj_range_elem.values.resize(vector_dimension);
-
         allocate(obj_range_elem, vector_dimension);
         #pragma omp parallel for schedule(static)
         for(unsigned int elem_index = 0; elem_index < obj_range_elem.vector_dimension; elem_index++)
@@ -47,10 +41,6 @@ namespace pnla{
 
     void vector_init_std_doubles(vector_omp &obj_std_doubles, std::vector<double> &std_vector, const int vector_dimension)
     {
-        ///resize vector
-        //obj_std_doubles.values.resize(vector_dimension);
-        //std_vector.resize(obj_std_doubles.values.size());
-
         allocate(obj_std_doubles, vector_dimension);
         #pragma omp parallel for schedule(static)
         for(unsigned int elem_index = 0; elem_index < obj_std_doubles.vector_dimension; elem_index++)
@@ -63,9 +53,6 @@ namespace pnla{
     void vector_copy(const vector_omp &obj_initial, vector_omp &obj_to_be_copied)
 
     {
-        ///resize vector
-        //obj_to_be_copied.values.resize(obj_initial.values.size());
-
         allocate(obj_to_be_copied, static_cast<int>(obj_initial.vector_dimension));
         #pragma omp parallel for schedule(static)
         for(unsigned int elem_index = 0; elem_index < obj_initial.vector_dimension; elem_index++)
@@ -87,7 +74,6 @@ namespace pnla{
     {
         double result_dot_prod = 0.0;
 
-        //#pragma omp parallel for shared(obj_dot_x, obj_dot_y) reduction(+:result_dot_prod)
         #pragma omp parallel for reduction(+:result_dot_prod)
         for(unsigned int elem_index = 0; elem_index < obj_dot_x.vector_dimension; elem_index++)
             {
@@ -106,7 +92,6 @@ namespace pnla{
    
    void vector_scaled_addition(vector_omp &obj_scaled_add_y, const vector_omp &obj_scaled_add_x, const double scaling_factor_add)
    {
-      //#pragma omp parallel for shared(obj_scaled_add_y, obj_scaled_add_x) schedule(static)
       #pragma omp parallel for schedule(static)
       for(unsigned int elem_index = 0; elem_index < obj_scaled_add_x.vector_dimension; elem_index++)
            {

@@ -6,71 +6,8 @@
 #include "PCG_Solver.h"
 #include <limits> //epsilon()
 #include <cmath>
-#include<chrono>
-
-/**
- * @brief Checks the convergence of the PCG towards the actual X.
- * 
- * @tparam Matrix Matrix Template argument which can be instantiated with classes having the same charecteristics of struct "CRS_Matrix".
- * @tparam Vector Vector Template argument which can be instantiated with classes having the same charecteristics of struct "vector_seq".
- * @param x_PCG_result The resultant X obtained after using PCG_Solver.
- * @param b_RHS Given RHS load vector.
- * @param A Given stifness matrix A in the CRS format.
- * @param epsilon tolerable error in computation.
- * @return double Returns the norm of the residue. (b - A * x)
- * 
- */
-template<typename Matrix, typename Vector>
-double PCG_convergence(Vector x_PCG_result, Vector b_RHS, Matrix A, const double epsilon)
-{
-    //Create a new vector b_pcg and initialize with b_RHS.
-    Vector b_pcg;
-    pnla::vector_copy(b_RHS, b_pcg);
-
-    //////
-    // std::vector<double> value = {3,4,7,4,9,2,-5,3,8,-1};
-    // std::vector<int> column = {1,2,5,4,1,2,3,2,4,5};
-    // std::vector<int> row = {0,3,4,7,9,10};
-    // Matrix A1;
-    // unsigned int nz = value.size();
-    // unsigned int nr = row.size();
-    // pnla::CRS_Matrix_initialization(A1, nr, nz, value, column, row);
-    // std::cout << "CRS initialized" << std::endl;
-    // for(unsigned int i = 0; i < nr -1; i++)
-    // {
-    //     std::cout << A1.Row_indices_non_zero_elements[i] << std::endl;
-    // }
-    // Vector x1, y1;
-    // pnla::vector_init_constant_elements(x1, 7, 1.0);
-    // std::vector<double> y1_std = {14, 4, 6, 11, -1};
-    // pnla::vector_init_std_doubles(y1, y1_std, y1_std.size());
-
-    // pnla::CRS_scaled_matrix_vector_multiplication(A1, x1, y1, 1.0, -1.0);
-    // std::cout << "scaled worked" << std::endl;
-    
-
-    // for(unsigned int i = 0; i < nr -1; i++)
-    // {
-    //     std::cout << y1.values[i] << std::endl;
-    // }
-
-    // std::cout << "The y1 norm is :   " << pnla::vector_euclidean_norm(y1) << std::endl;
-
-    // return 0;    
-    //////////////
-
-
-    // Computes A * X and stores in b_pcg. X is the result obtained from the PCG_Solver.
-    pnla::CRS_scaled_matrix_vector_multiplication(A, x_PCG_result, b_pcg, -1.0, 1.0);
-
-    //Computes the residue and compare with the given b_RHS.
-    double norm_b_pcg = pnla::vector_euclidean_norm(b_pcg);
-    double norm_b_RHS = pnla::vector_euclidean_norm(b_RHS);
-    
-    norm_b_pcg = (norm_b_pcg / norm_b_RHS);
-    std::cout << "the norm of b_residue is :   " << norm_b_pcg << std::endl;
-    return norm_b_pcg;
-}
+#include <chrono>
+#include <omp.h>
 
 /**
  * @brief Application which solves the poisson equation on the unit square.
@@ -114,6 +51,7 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
     // Stores the Vector B in the sequential vector B_FD.
     Vector b_FD;
     pnla::vector_init_std_doubles(b_FD, b, b_size);
+    b_FD.vector_dimension = inner_points * inner_points;
 
     // Inititalizes the CRS_matrix.
     Matrix A_FD;
@@ -130,13 +68,25 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
     auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     std::cout << "Time in milliseconds is :  " << run_time.count() << std::endl;
 
-    //Check for convergence and the number of iterations taken to converge.
-    double norm_b = PCG_convergence<Matrix, Vector>(x_FD, b_FD, A_FD, epsilon);
 
-    //std::cout << "The norm of b is :    " << norm_b << std::endl;
+    //Check for convergence and the number of iterations taken to converge.
+
+    Vector b_pcg;
+    pnla::vector_copy(b_FD, b_pcg);
+
+
+    // Computes A * X and stores in b_pcg. X is the result obtained from the PCG_Solver.
+    pnla::CRS_scaled_matrix_vector_multiplication(A_FD, x_FD, b_pcg, -1.0, 1.0);
+
+    //Computes the residue and compare with the given b_RHS.
+    double norm_b_pcg = pnla::vector_euclidean_norm(b_pcg);
+    double norm_b_RHS = pnla::vector_euclidean_norm(b_FD);
+    
+    norm_b_pcg = (norm_b_pcg / norm_b_RHS);
+    std::cout << "the norm of b_residue is :   " << norm_b_pcg << std::endl;
     std::cout << "Number of iterations taken to converge is :    " << iterations << std::endl;
 
-    if(abs(norm_b) > epsilon)
+    if(abs(norm_b_pcg) > epsilon)
     {
         std::cout << "PCG did not converge as intended";
         return test_sucess_count + 1;
@@ -166,9 +116,22 @@ int main(int argc, char *argv[])
          inner_points = std::stoi(argv[1]);
 	}
 
+    if(argc == 3)
+	{
+        inner_points = std::stoi(argv[1]);
+        const int nr_of_threads = std::stoi(argv[2]);
+        omp_set_num_threads(nr_of_threads);
+	}
+
+    std::cout<<"Poisson_2d sequential PCG"<<std::endl;
+    // instantiating the template function with the struct "CRS_Matrix_omp" and "vector_omp".
     test_result += poisson_2d<pnla::CRS_Matrix, pnla::vector_seq>(test_result, inner_points, epsilon);
 
-    if(test_result !=0 )
+    std::cout<<"Poisson_2d OMP PCG"<<std::endl;
+    // instantiating the template function with the struct "CRS_Matrix_omp" and "vector_omp".
+    test_result += poisson_2d<pnla::CRS_Matrix_omp, pnla::vector_omp>(test_result, inner_points, epsilon);
+
+    if(test_result !=0)
         return test_result;
 
     return test_result;

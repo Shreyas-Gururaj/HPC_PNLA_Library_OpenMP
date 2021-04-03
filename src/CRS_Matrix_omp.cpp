@@ -57,11 +57,11 @@ namespace pnla{
 
         allocate(y, static_cast<int>(y.vector_dimension));
 
+        #pragma omp parallel for schedule(static)
         for(unsigned int i = 0; i < obj_CRS_Matrix.total_num_of_rows - 1; i++)
         {
             y.values[i] *= beta;
 
-            #pragma omp parallel for reduction(+:y.values[i])
             for(int k = obj_CRS_Matrix.Row_indices_non_zero_elements[i]; k < obj_CRS_Matrix.Row_indices_non_zero_elements[i + 1]; k++)
                 { 
                     y.values[i] += alpha * obj_CRS_Matrix.Matrix_non_zero_elements[k] * x.values[obj_CRS_Matrix.Col_indices_non_zero_elements[k]];

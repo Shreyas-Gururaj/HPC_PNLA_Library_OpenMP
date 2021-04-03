@@ -125,7 +125,7 @@ int test_vector_routines(const int inner_points, const double epsilon)
  */
 int main(int argc, char *argv[])
 {
-    int total_inner_points = 10;
+    int total_inner_points = 20;
 
 
  	if(argc == 2)

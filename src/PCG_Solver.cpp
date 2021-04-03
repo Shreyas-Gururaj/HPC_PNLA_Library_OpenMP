@@ -10,8 +10,6 @@
  */
 
 #include "PCG_Solver.h"
-#include "vector_seq.h"
-#include "CRS_Matrix.h"
 #include <iostream>
 
 namespace pnla{
@@ -23,6 +21,7 @@ int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x
 {
 
     Vector residue_vector;
+    //b_RHS_Vector.vector_dimension = b_RHS_Vector.values.size();
     vector_copy(b_RHS_Vector, residue_vector);               // initiates the residue_vector, r_0 with the RHS b_RHS_Vector.
     CRS_scaled_matrix_vector_multiplication(CRS_Matrix_A, x_PCG_result, residue_vector, -1.0, 1.0);   //
 
@@ -31,7 +30,7 @@ int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x
 
     vector_copy(residue_vector, vector_P);   //Assuming conditioner is an identity matrix.
     vector_copy(residue_vector, vector_V);    //Assuming conditioner is an identity matrix.
-    vector_init_constant_elements(vector_W, b_RHS_Vector.values.size(), 0.0);
+    vector_init_constant_elements(vector_W, b_RHS_Vector.vector_dimension, 0.0);
 
     double rho = vector_dot_product(vector_V, residue_vector);
     double gamma = 0.0;     //required for further computations as rho(k) cannot be stored on the run otherwise.
@@ -68,5 +67,8 @@ int PCG_Result(const Matrix &CRS_Matrix_A, const Vector &b_RHS_Vector, Vector &x
 }
 
 template int PCG_Result(const CRS_Matrix &CRS_Matrix_A, const vector_seq &b_RHS_Vector, vector_seq &x_PCG_result, const double rel_accuracy,
+                  const unsigned int max_iterations);
+
+template int PCG_Result(const CRS_Matrix_omp &CRS_Matrix_A, const vector_omp &b_RHS_Vector, vector_omp &x_PCG_result, const double rel_accuracy,
                   const unsigned int max_iterations);
 }// end namespace pnla
