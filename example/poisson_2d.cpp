@@ -48,6 +48,7 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
     // Stores the Vector X in the sequential vector X_FD.
     Vector x_FD;
     pnla::vector_init_std_doubles(x_FD, x, x_size);
+    x_FD.vector_dimension = inner_points * inner_points;
     // Stores the Vector B in the sequential vector B_FD.
     Vector b_FD;
     pnla::vector_init_std_doubles(b_FD, b, b_size);

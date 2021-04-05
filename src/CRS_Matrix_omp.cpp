@@ -19,17 +19,9 @@ namespace pnla{
      void CRS_Matrix_initialization(CRS_Matrix_omp &obj_CRS_init, const unsigned int num_of_rows, const unsigned int num_non_zero_entries, 
                                     const std::vector<double> &values, const std::vector<int> &col_index, const std::vector<int> &row_index)
     {
-        obj_CRS_init.total_non_zero_elements = num_non_zero_entries;
-        obj_CRS_init.total_num_of_rows = num_of_rows;
-
-        /////resize vectors
-        // obj_CRS_init.Matrix_non_zero_elements.resize(num_non_zero_entries);
-        // obj_CRS_init.Col_indices_non_zero_elements.resize(num_non_zero_entries);
-        // obj_CRS_init.Row_indices_non_zero_elements.resize(num_of_rows);
-
         allocate_non_zero(obj_CRS_init, num_non_zero_entries);
         allocate_columns(obj_CRS_init, num_non_zero_entries);
-        allocate_rows(obj_CRS_init, num_of_rows);
+        allocate_rows(obj_CRS_init, num_of_rows + 1);
 
         #pragma omp parallel for schedule(static)
         for(unsigned int elem_index = 0; elem_index < num_non_zero_entries; elem_index++)

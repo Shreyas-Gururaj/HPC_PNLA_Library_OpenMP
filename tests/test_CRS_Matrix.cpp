@@ -47,16 +47,14 @@ int test_Matrix_init(int test_sucess_count, const int inner_points, const double
     // To get the test vector X containing the row sum of A * X(1).
     std::vector<double> test_x;
     obj_FD_LS.get_test_vector(test_x);
-    const int test_x_size = test_x.size();
 
     // Storing the values obtained from the FD_linear system in the CRS_Matrix.
     const unsigned int num_of_rows = (rows.size());
     const unsigned int num_non_zero = (values.size());
     Matrix CRS_matrix_A;
-    CRS_matrix_A.total_num_of_rows = num_of_rows;
-    CRS_matrix_A.total_non_zero_elements = num_non_zero;
 
     auto start_time = std::chrono::high_resolution_clock::now();
+    //pnla::CRS_Matrix_initialization(CRS_matrix_A, num_of_rows, num_non_zero, values, columns, rows);
     pnla::CRS_Matrix_initialization(CRS_matrix_A, num_of_rows, num_non_zero, values, columns, rows);
     auto end_time = std::chrono::high_resolution_clock::now();
     auto run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
@@ -70,19 +68,22 @@ int test_Matrix_init(int test_sucess_count, const int inner_points, const double
     pnla::vector_init_constant_elements(x, num_of_rows, 1.0);
     pnla::vector_init_constant_elements(y, num_of_rows, 0.0);
 
+
     start_time = std::chrono::high_resolution_clock::now();
     pnla::CRS_scaled_matrix_vector_multiplication(CRS_matrix_A, x, y, 1.0,  1.0);
+
+
     end_time = std::chrono::high_resolution_clock::now();
     run_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     std::cout << "Time in milliseconds for CRS_scaled_matrix_vector_multiplication is :  " << run_time.count() << std::endl;
 
     // Comparing the result with the test vector x.
     Vector text_x_seq;
-    pnla::vector_init_std_doubles(text_x_seq, test_x, test_x_size);
+    text_x_seq.vector_dimension = inner_points * inner_points;
+
+    pnla::vector_init_std_doubles(text_x_seq, test_x, text_x_seq.vector_dimension);
     pnla::vector_scaled_addition(y, text_x_seq, -1.0);
     const double norm_y = pnla::vector_euclidean_norm(y);
-
-    std::cout << "the norm is: " << norm_y << std::endl;
 
     if(abs(norm_y) > epsilon)
     {
@@ -126,7 +127,9 @@ int test_vector_routines(const int inner_points, const double epsilon)
 int main(int argc, char *argv[])
 {
     int total_inner_points = 20;
-
+    const double epsilon(std::numeric_limits<double>::epsilon()); 
+    int test_result = 0; 
+    unsigned int nr_of_threads;
 
  	if(argc == 2)
 	{
@@ -136,12 +139,11 @@ int main(int argc, char *argv[])
     if(argc == 3)
 	{
         total_inner_points = std::stoi(argv[1]);
-        const int nr_of_threads = std::stoi(argv[2]);
+        nr_of_threads = std::stoi(argv[2]);
         omp_set_num_threads(nr_of_threads);
-	}
+	} 
 
-    const double epsilon(std::numeric_limits<double>::epsilon()); 
-    int test_result = 0; 
+    std::cout << "No of threads =   " << nr_of_threads << std::endl;
 
     std::cout<<"Test sequential CRS_Matrix"<<std::endl;
     // instantiating the template function with the struct "CRS_Matrix" and "vector_seq".

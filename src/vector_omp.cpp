@@ -87,7 +87,6 @@ namespace pnla{
     {
         double result_euclidean_norm = sqrt(vector_dot_product(obj_norm_x, obj_norm_x));
         return result_euclidean_norm;
-
     }
    
    void vector_scaled_addition(vector_omp &obj_scaled_add_y, const vector_omp &obj_scaled_add_x, const double scaling_factor_add)

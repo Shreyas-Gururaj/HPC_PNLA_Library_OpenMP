@@ -35,7 +35,8 @@ namespace pnla{
         unsigned int vector_dimension;
 
         //Std vector of doubles to store the elemnts in the vector of given dimension.
-        std::unique_ptr<double[]> values;
+        //std::unique_ptr<double[]> values;
+        std::shared_ptr<double[]> values;
 
     };
 

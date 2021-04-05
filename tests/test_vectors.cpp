@@ -190,7 +190,8 @@ int test_vector_routines(const int dimension, const double epsilon)
 int main(int argc, char *argv[])
 {
     int dim = 20;
-
+    const double epsilon(std::numeric_limits<double>::epsilon()); 
+    int test_result = 0;
 
  	if(argc == 2)
 	{
@@ -203,10 +204,6 @@ int main(int argc, char *argv[])
         const int nr_of_threads = std::stoi(argv[2]);
         omp_set_num_threads(nr_of_threads);
 	}
-
-    const double epsilon(std::numeric_limits<double>::epsilon()); 
-    int test_result = 0;
-
 
     std::cout<<"Test Sequential Vector"<<std::endl;
 

@@ -31,17 +31,13 @@ namespace pnla{
         unsigned int total_non_zero_elements;
 
         // Stores the values of the non zero entries of the matrix A. (Av)
-        //std::vector<double> Matrix_non_zero_elements;
-        std::unique_ptr<double[]> Matrix_non_zero_elements;
-        
+        std::shared_ptr<double[]> Matrix_non_zero_elements;
 
         // Stores the column indices of the respective non zero entries. (Ja)
-        //std::vector<int> Col_indices_non_zero_elements;
-        std::unique_ptr<int[]> Col_indices_non_zero_elements;
+        std::shared_ptr<int[]> Col_indices_non_zero_elements;
         
         // Stores the row indices of the respective non zero entries. (Ia)
-        //std::vector<int> Row_indices_non_zero_elements;
-        std::unique_ptr<int[]> Row_indices_non_zero_elements;
+        std::shared_ptr<int[]> Row_indices_non_zero_elements;
     };
 
             /**
