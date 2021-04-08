@@ -1,7 +1,7 @@
 /**
  * @file CRS_Matrix.cpp
  * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
- * @brief 
+ * @brief Implementation of all the routines for sequential CRS_Matrix.
  * @version 0.1
  * @date 2021-03-28
  * 

@@ -1,9 +1,9 @@
 /**
  * @file FD_linear_system.h
- * @author Thomas Rau (thomas1.rau@uni-bayreuth.de)
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
  * @brief Header file for Finite Differences Linear System Class
  * @version 0.1
- * @date 2021-03-01
+ * @date 2021-03-28
  * 
  * @copyright Copyright (c) 2021
  * 

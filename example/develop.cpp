@@ -1,9 +1,9 @@
 /**
  * @file develop.cpp
- * @author your name (you@domain.com)
- * @brief 
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
+ * @brief To test the cmakelist.txt file.
  * @version 0.1
- * @date 2021-03-04
+ * @date 2021-03-28
  * 
  * @copyright Copyright (c) 2021
  * 

@@ -1,7 +1,7 @@
 /**
  * @file vector_omp.h
  * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
- * @brief Header files for sequential vector functions requird for the PCG algorithm.
+ * @brief Header files for vector_omp functions requird for the PCG algorithm.
  * @version 0.1
  * @date 2021-03-28
  * 

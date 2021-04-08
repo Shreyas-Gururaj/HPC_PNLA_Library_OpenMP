@@ -1,9 +1,9 @@
 /**
  * @file HelloCluster.cpp
- * @author Thomas Rau (thomas1.rau@uni-bayreuth.de)
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
  * @brief 
  * @version 0.1
- * @date 2021-03-24
+ * @date 2021-03-28
  * 
  * @copyright Copyright (c) 2021
  * 

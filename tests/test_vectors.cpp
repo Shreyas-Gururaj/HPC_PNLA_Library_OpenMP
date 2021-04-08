@@ -1,7 +1,7 @@
 /**
  * @file test_vectors.cpp
  * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
- * @brief 
+ * @brief Unit test for all the vector routines.
  * @version 0.1
  * @date 2021-03-28
  * 

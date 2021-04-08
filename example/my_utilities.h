@@ -1,9 +1,9 @@
 /**
  * @file my_utilities.h
- * @author Thomas Rau (thomas1.rau@uni-bayreuth.de)
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
  * @brief Shows usage of function templates. Provided function templates may be useful 
  * @version 0.1
- * @date 2021-03-14
+ * @date 2021-03-28
  * 
  * @copyright Copyright (c) 2021
  * 

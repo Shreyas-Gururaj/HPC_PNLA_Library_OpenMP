@@ -1,3 +1,14 @@
+/**
+ * @file poisson_2d.cpp
+ * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
+ * @brief Application to solve poisson equations for a 2d finite differential system for a unit square.
+ * @version 0.1
+ * @date 2021-03-28
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
 #include <vector>
 #include <iostream>
 #include "FD_linear_system.h"
@@ -59,7 +70,7 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
     pnla::CRS_Matrix_initialization(A_FD, num_of_rows, num_non_zero, values, columns, rows);
 
     // PCG solver called.
-    double relative_accuracy = 1e-16;   
+    double relative_accuracy = 1e-16;
 
     auto start_time = std::chrono::high_resolution_clock::now();
 

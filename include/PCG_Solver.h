@@ -1,7 +1,7 @@
 /**
  * @file PCG_Solver.h
  * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
- * @brief 
+ * @brief Header files for the PCG algorithm.
  * @version 0.1
  * @date 2021-03-28
  * 

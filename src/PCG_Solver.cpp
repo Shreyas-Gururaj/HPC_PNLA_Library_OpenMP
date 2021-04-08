@@ -1,7 +1,7 @@
 /**
  * @file PCG_Solver.cpp
  * @author Shreyas Gururaj (Shreyas.Gururaj@uni-bayreuth.de)
- * @brief 
+ * @brief PCG solver implementation.
  * @version 0.1
  * @date 2021-03-28
  * 
