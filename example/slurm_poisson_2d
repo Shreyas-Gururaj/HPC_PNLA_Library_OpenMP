@@ -36,7 +36,7 @@
 
 
 # here your programm is started
-./poisson_2d
+./poisson_2d.cpp
 # mpirun -np ${SLURM_NTASKS} ./poisson_2d
 
 
