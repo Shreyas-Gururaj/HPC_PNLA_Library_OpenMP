@@ -118,7 +118,7 @@ int poisson_2d(int test_sucess_count, const int inner_points, const double epsil
  */
 int main(int argc, char *argv[])
 {
-    int inner_points = 6400;
+    int inner_points = 100;
 
     int test_result = 0;
     const double epsilon(std::numeric_limits<double>::epsilon());
