@@ -1,0 +1,55 @@
+#!/bin/bash 
+
+##############################
+#       Slurm Job - to be used with poisson_2d Program.        
+##############################
+
+# Give your job a name, so you can recognize it in the queue overview
+#SBATCH --job-name=poisson_2d
+
+
+# Define, how many nodes you need.
+#SBATCH --nodes=1
+
+# Define how many tasks per node -> useful for MPI/OpenMP-Hybrid computations
+#SBATCH --tasks-per-node=1
+
+# Declares how many threads per cpu shall be started
+#SBATCH --cpus-per-task=24
+
+
+# Define, how long the job will run in real time. This is a hard cap meaning
+# that if the job runs longer than what is written here, it will be
+# force-stopped by the server. If you make the expected time too long, it will
+# take longer for the job to start. Here, we say the job will take 5 minutes.
+#              d-hh:mm:ss
+#SBATCH --time=0-00:02:00
+
+# Define the partition on which the job shall run. May be omitted
+#SBATCH --partition WAP
+
+
+# Turn on mail notification. There are many possible self-explaining values:
+# NONE, BEGIN, END, FAIL, ALL (including all aforementioned)
+# For more values, check "man sbatch"
+#SBATCH --mail-type=END,FAIL
+
+
+# here your programm is started
+./poisson_2d.cpp
+# mpirun -np ${SLURM_NTASKS} ./poisson_2d
+
+
+# After the job is done we copy our output back to $SLURM_SUBMIT_DIR
+
+# In addition to the copied files, you will also find a file called
+# slurm-1234.out in the submit directory. This file will contain all output that
+# was produced during runtime, i.e. stdout and stderr.
+
+# After everything is saved to the home directory, delete the work directory to
+# save space on /global/work
+cd ${SLURM_SUBMIT_DIR}
+
+# Finish the script
+exit 0
+# to show your own jobs on slurm use "squeue -u $USER"
