@@ -36,7 +36,8 @@
 
 
 # here your programm is started
-mpirun -np ${SLURM_NTASKS} ./poisson_2d
+./poisson_2d
+# mpirun -np ${SLURM_NTASKS} ./poisson_2d
 
 
 # After the job is done we copy our output back to $SLURM_SUBMIT_DIR
