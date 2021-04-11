@@ -33,7 +33,11 @@
 
 
 # here your program is started
-./test_poisson_2d
+./test_poisson_2d 100
+./test_poisson_2d 200
+./test_poisson_2d 400
+./test_poisson_2d 800
+./test_poisson_2d 1600
 
 # After the job is done we copy our output back to $SLURM_SUBMIT_DIR
 
