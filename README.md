@@ -1,7 +1,7 @@
 #Template for Practical Course on Parallel Numerical Methods 20/21
 
 
-Every software project should have a README file. Here you have a md-file formate example.  
+Every software project should have a README file. Here you have a md-file format example.  
 Alternativly, a puristic txt-format can be used if you don't care for eye candy.
 
 ***
