@@ -1,7 +1,7 @@
 # Parallel Numerical Linear Algebra (Library)
 
 ***
-##Build Project
+## Build Project
 This project uses **CMake** as building tool.  
 In order to build the project, execute following commands in current directory:
 
