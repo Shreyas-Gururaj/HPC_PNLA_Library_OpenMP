@@ -20,7 +20,7 @@ Example usages can be found in "example"(Resolves a Finite Element discretized 2
 CRS format was used for storage and matrix operation routines.
 
 ***
-Tesing routines aer implemented in "tests".
+Tesing routines are implemented in "tests".
 
 ***
 Please have a brief look at the <b> "HPC_Lab_WiSe 2020_21.pptx" </b> which is available in this repo to see the scaling in the openmp parallelized implementation of the preconditioned conjugate gradient (PCG) solver tested for liniear equation systems upto 2.5 million unknowns.
